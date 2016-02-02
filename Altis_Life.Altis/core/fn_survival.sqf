@@ -11,7 +11,6 @@ _fnc_food =  {
 	else
 	{
 		SUB(life_hunger,10);
-		[8] call SOCK_fnc_updatePartial;
 		if(life_hunger < 2) then {player setDamage 1; hint localize "STR_NOTF_EatMSG_Death";};
 		switch(life_hunger) do {
 			case 30: {hint localize "STR_NOTF_EatMSG_1";};
@@ -29,7 +28,6 @@ _fnc_water = {
 	else
 	{
 		SUB(life_thirst,10);
-		[8] call SOCK_fnc_updatePartial;
 		if(life_thirst < 2) then {player setDamage 1; hint localize "STR_NOTF_DrinkMSG_Death";};
 		switch(life_thirst) do  {
 			case 30: {hint localize "STR_NOTF_DrinkMSG_1";};

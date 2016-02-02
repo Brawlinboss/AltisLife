@@ -77,7 +77,7 @@ class VirtualShops {
         side = "civ";
         license = "";
         level[] = { "", "", -1, "" };
-        items[] = { "salema_raw", "salema", "ornate_raw", "ornate", "mackerel", "mackerel", "tuna_raw", "tuna", "mullet_raw", "mullet", "catshark_raw", "catshark" };
+        items[] = { "salema_raw", "salema", "ornate_raw", "ornate", "mackerel", "tuna_raw", "tuna", "mullet_raw", "mullet", "catshark_raw", "catshark" };
     };
 
     class glass {
@@ -117,7 +117,7 @@ class VirtualShops {
         side = "cop";
         license = "";
         level[] = { "", "", -1, "" };
-        items[] = { "donuts", "coffee", "spikeStrip", "waterBottle", "rabbit", "apple", "redgull", "fuelFull", "defusekit" "repairKit"};
+        items[] = { "donuts", "coffee", "spikeStrip", "waterBottle", "rabbit", "apple", "redgull", "fuelFull", "defusekit", "repairKit"};
     };
 
     class medical {

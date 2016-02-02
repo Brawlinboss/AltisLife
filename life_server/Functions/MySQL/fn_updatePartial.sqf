@@ -90,14 +90,7 @@ switch(_mode) do
 
 	case 8:
 	{
-		_value1 = [_this,2,0,[0]] call BIS_fnc_param;
-		_value2 = [_this,4,0,[0]] call BIS_fnc_param;
-		switch(_side) do
-		{
-			case west: {_query = format["UPDATE players SET cop_hunger='%1', cop_thirst='%2' WHERE playerid='%3'",_value1,_value2,_uid];};
-			case civilian: {_query = format["UPDATE players SET civ_hunger='%1', civ_thirst='%2' WHERE playerid='%3'",_value1,_value2,_uid];};
-			case independent: {_query = format["UPDATE players SET med_hunger='%1', med_thirst='%2' WHERE playerid='%3'",_value1,_value2,_uid];};
-		};
+		// Will use later for health.
 	};
 };
 

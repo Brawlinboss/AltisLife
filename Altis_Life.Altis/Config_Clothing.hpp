@@ -80,7 +80,7 @@ class Clothing
         vests[] =
         {
             { "NONE", "Remove Vest", 0, { "", "", -1 } },
-            { "V_BandollierB_khk, "", 1000, { "", "", -1 } }
+            { "V_BandollierB_khk", "", 1000, { "", "", -1 } }
         };
 
         backpacks[] =

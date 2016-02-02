@@ -64,8 +64,7 @@ switch(_mode) do
 
 	case 8:
 	{
-		_packet set[2,life_hunger];
-		_packet set[4,life_thirst];
+		// Will use for health later in life... lets improve performance
 	};
 };
 

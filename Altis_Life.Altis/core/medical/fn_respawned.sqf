@@ -69,4 +69,4 @@ if(life_removeWanted) then {
 };
 
 [] call life_fnc_playerSkins;
-if(!(life_swat_commander OR life_swat_recon OR life_swat_assault)) then { [] call SOCK_fnc_updateRequest; };
+[] call SOCK_fnc_updateRequest;

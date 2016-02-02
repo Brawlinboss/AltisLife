@@ -42,7 +42,7 @@ _money = [_money] call DB_fnc_numberSafe;
 _bank = [_bank] call DB_fnc_numberSafe;
 
 //Prepare the query statement..
-_query = format["INSERT INTO players (playerid, name, cash, bankacc, aliases, cop_licenses, med_licenses, civ_licenses, civ_gear, cop_gear, med_gear) VALUES('%1', '%2', '%3', '%4', '%5','""[]""','""[]""','""[]""','""[]""','""[`U_Competitor`,`V_TacVest_blk_POLICE`,``,``,`H_Cap_police`,[`ItemMap`,`ItemCompass`,`ItemWatch`,`ItemGPS`,`NVGoggles_OPFOR`,`Binocular`],`arifle_TRG21_F`,`hgun_P07_F`,[],[`30Rnd_9x21_Mag`,`30Rnd_9x21_Mag`],[],[],[`NVGoggles_OPFOR`],[`30Rnd_556x45_Stanag_Tracer_Green`,`30Rnd_556x45_Stanag_Tracer_Green`,`30Rnd_556x45_Stanag_Tracer_Green`,`30Rnd_556x45_Stanag_Tracer_Green`,`30Rnd_556x45_Stanag_Tracer_Green`,`30Rnd_556x45_Stanag_Tracer_Green`,`30Rnd_9x21_Mag`],[``,``,`optic_ACO_grn`,``],[`muzzle_snds_L`,``,``,``],[]]""','""[]""')",
+_query = format["INSERT INTO players (playerid, name, cash, bankacc, aliases, cop_licenses, med_licenses, civ_licenses, civ_gear, cop_gear, med_gear, civ_stats, cop_stats, med_stats) VALUES('%1', '%2', '%3', '%4', '%5','""[]""','""[]""','""[]""','""[]""','""[`U_Competitor`,`V_TacVest_blk_POLICE`,``,``,`H_Cap_police`,[`ItemMap`,`ItemCompass`,`ItemWatch`,`ItemGPS`,`NVGoggles_OPFOR`,`Binocular`],`arifle_TRG21_F`,`hgun_P07_F`,[],[`30Rnd_9x21_Mag`,`30Rnd_9x21_Mag`],[],[],[`NVGoggles_OPFOR`],[`30Rnd_556x45_Stanag_Tracer_Green`,`30Rnd_556x45_Stanag_Tracer_Green`,`30Rnd_556x45_Stanag_Tracer_Green`,`30Rnd_556x45_Stanag_Tracer_Green`,`30Rnd_556x45_Stanag_Tracer_Green`,`30Rnd_556x45_Stanag_Tracer_Green`,`30Rnd_9x21_Mag`],[``,``,`optic_ACO_grn`,``],[`muzzle_snds_L`,``,``,``],[]]""','""[]""','""[100,100]""','""[100,100]""','""[100,100]""')",
 	_uid,
 	_name,
 	_money,

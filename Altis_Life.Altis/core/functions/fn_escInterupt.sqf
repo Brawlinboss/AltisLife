@@ -33,7 +33,7 @@ _escSync = {
 	};
 
 	_abortButton = CONTROL(49,104);
-	if(!(life_swat_commander OR life_swat_recon OR life_swat_assault)) then { [] call SOCK_fnc_updateRequest; }; //call our silent sync.
+	[] call SOCK_fnc_updateRequest; //call our silent sync.
 
 	if(_this) then {
 		_thread = [] spawn _syncManager;

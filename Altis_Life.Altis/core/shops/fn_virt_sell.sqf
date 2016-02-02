@@ -51,4 +51,4 @@ if(EQUAL(life_shop_type,"gold") && (LIFE_SETTINGS(getNumber,"noatm_timer")) > 0)
 };
 
 [0] call SOCK_fnc_updatePartial;
-if(!(life_swat_commander OR life_swat_recon OR life_swat_assault)) then { [3] call SOCK_fnc_updatePartial; };
+[3] call SOCK_fnc_updatePartial;

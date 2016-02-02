@@ -21,12 +21,11 @@ class WeaponShops
         msg = "";
         items[] =
         {
-            //  classname,      customName,  BUY,   SELL
-            { "srifle_DMR_01_F",      "",    5250,  2000  },
-            { "10Rnd_762x54_Mag", "",    225,   55    },
-            { "optic_Hamr",          "",    450,   200   },
-            { "optic_MRCO",          "",    475,   200   },
-            { "optic_Arco",          "",    525,   200   }
+            { "srifle_DMR_01_F", "", 5250 2000 },
+            { "10Rnd_762x54_Mag", "", 225, 55 },
+            { "optic_Hamr", "", 450, 200 },
+            { "optic_MRCO", "", 475, 200 },
+            { "optic_Arco", "", 525, 200 }
         };
     };
 
@@ -38,15 +37,15 @@ class WeaponShops
         level[] = { "", "", -1, "" };
         items[] =
         {
-            { "hgun_Rook40_F",             "",   2000,  1200 },
-            { "hgun_Pistol_heavy_02_F",    "",   3500,  2000 },
-            { "hgun_ACPC2_F",              "",   2750,  1900 },
-            { "hgun_PDW2000_F",            "",   4500,  2250 },
-            { "arifle_SDAR_F",             "",   4750,  2400 },
-            { "optic_ACO_grn_smg",         "",   200,   100  },
-            { "16Rnd_9x21_Mag",            "",   25,    11   },
-            { "9Rnd_45ACP_Mag",            "",   30,    15   },
-            { "6Rnd_45ACP_Cylinder",       "", 35, 18 },
+            { "hgun_Rook40_F", "", 2000, 1200 },
+            { "hgun_Pistol_heavy_02_F", "", 3500, 2000 },
+            { "hgun_ACPC2_F", "", 2750, 1900 },
+            { "hgun_PDW2000_F", "", 4500 2250 },
+            { "arifle_SDAR_F", "", 4750 2400 },
+            { "optic_ACO_grn_smg", "", 200, 100 },
+            { "16Rnd_9x21_Mag", "", 25, 11 },
+            { "9Rnd_45ACP_Mag", "", 30, 15 },
+            { "6Rnd_45ACP_Cylinder", "", 35, 18 },
             { "30Rnd_9x21_Mag", "", 110, 65 },
             { "20Rnd_556x45_UW_mag", "", 120, 70 }
         };

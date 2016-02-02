@@ -25,9 +25,9 @@ _ownerID = owner _ownerID;
 */
 _query = switch(_side) do
 {
-	case west: {_returnCount = 13; format["SELECT playerid, name, cash, bankacc, adminlevel, donatorlvl, cop_licenses, coplevel, cop_gear, blacklist, cop_hunger, cop_thirst, swatlevel FROM players WHERE playerid='%1'",_uid];};
-	case civilian: {_returnCount = 11; format["SELECT playerid, name, cash, bankacc, adminlevel, donatorlvl, civ_licenses, arrested, civ_gear, civ_hunger, civ_thirst FROM players WHERE playerid='%1'",_uid];};
-	case independent: {_returnCount = 11; format["SELECT playerid, name, cash, bankacc, adminlevel, donatorlvl, med_licenses, mediclevel, med_gear, med_hunger, med_thirst FROM players WHERE playerid='%1'",_uid];};
+	case west: {_returnCount = 13; format["SELECT playerid, name, cash, bankacc, adminlevel, donatorlvl, cop_licenses, coplevel, cop_gear, blacklist, cop_stats, swatlevel FROM players WHERE playerid='%1'",_uid];};
+	case civilian: {_returnCount = 11; format["SELECT playerid, name, cash, bankacc, adminlevel, donatorlvl, civ_licenses, arrested, civ_gear, civ_stats FROM players WHERE playerid='%1'",_uid];};
+	case independent: {_returnCount = 11; format["SELECT playerid, name, cash, bankacc, adminlevel, donatorlvl, med_licenses, mediclevel, med_gear, med_stats FROM players WHERE playerid='%1'",_uid];};
 };
 
 
@@ -82,18 +82,31 @@ switch (_side) do
 	case west:
 	{
 		_queryResult set[9,([_queryResult select 9,1] call DB_fnc_bool)];
+		_new = [(_queryResult select 10)] call DB_fnc_mresToArray;
+		if(typeName _new == "STRING") then {_new = call compile format["%1", _new];};
+		_queryResult set[10,_new];
 		_queryResult set[12,([_queryResult select 12,1] call DB_fnc_bool)];
 	};
 
 	case civilian:
 	{
 		_queryResult set[7,([_queryResult select 7,1] call DB_fnc_bool)];
+		_new = [(_queryResult select 9)] call DB_fnc_mresToArray;
+		if(typeName _new == "STRING") then {_new = call compile format["%1", _new];};
+		_queryResult set[9,_new];
 		_houseData = _uid spawn TON_fnc_fetchPlayerHouses;
 		waitUntil {scriptDone _houseData};
 		_queryResult pushBack (missionNamespace getVariable[format["houses_%1",_uid],[]]);
 		_gangData = _uid spawn TON_fnc_queryPlayerGang;
 		waitUntil{scriptDone _gangData};
 		_queryResult pushBack (missionNamespace getVariable[format["gang_%1",_uid],[]]);
+	};
+
+	case independent:
+	{
+		_new = [(_queryResult select 9)] call DB_fnc_mresToArray;
+		if(typeName _new == "STRING") then {_new = call compile format["%1", _new];};
+		_queryResult set[9,_new];
 	};
 };
 
