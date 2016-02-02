@@ -6,7 +6,7 @@
 	Description:
 	Initializes the civilian.
 */
-private["_spawnPos"];
+private["_spawnPos","_weapon","_ammo"];
 civ_spawn_1 = nearestObjects[getMarkerPos  "civ_spawn_1", ["Land_i_Shop_01_V1_F","Land_i_Shop_01_V2_F","Land_i_Shop_01_V3_F","Land_i_Shop_02_V1_F","Land_i_Shop_02_V2_F","Land_i_Shop_02_V3_F"],250];
 civ_spawn_2 = nearestObjects[getMarkerPos  "civ_spawn_2", ["Land_i_Shop_01_V1_F","Land_i_Shop_01_V2_F","Land_i_Shop_01_V3_F","Land_i_Shop_02_V1_F","Land_i_Shop_02_V2_F","Land_i_Shop_02_V3_F"],250];
 civ_spawn_3 = nearestObjects[getMarkerPos  "civ_spawn_3", ["Land_i_Shop_01_V1_F","Land_i_Shop_01_V2_F","Land_i_Shop_01_V3_F","Land_i_Shop_02_V1_F","Land_i_Shop_02_V2_F","Land_i_Shop_02_V3_F"],250];
@@ -31,10 +31,18 @@ if(EQUAL(LIFE_SETTINGS(getNumber,"rahim_singleshot"),1)) then
 	{
 		while {true} do
 		{
-			waitUntil {sleep 2; currentWeapon player == "srifle_DMR_01_F"};
-			player forceWeaponFire ["srifle_DMR_01_F","Single"];
+			waitUntil {sleep 1.5; currentWeapon player == "srifle_DMR_01_F"};
+			if(currentWeaponMode player == "FullAuto") then
+			{
+				_weapon = currentWeapon player;
+				_ammo = player ammo _weapon;
+				player setAmmo [_weapon,0];
+				player forceWeaponFire [_weapon,"Single"];
+				player setAmmo [_weapon,_ammo];
+			};
 		};
 	};
 };
+
 player addRating 9999999;
 [] call life_fnc_playerSkins;

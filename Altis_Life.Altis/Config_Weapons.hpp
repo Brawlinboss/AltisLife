@@ -22,11 +22,8 @@ class WeaponShops
         items[] =
         {
             //  classname,      customName,  BUY,   SELL
-            { "arifle_Mk20C_F",      "",    5250,  2000  },
-            { "30Rnd_556x45_Stanag", "",    130,   -75   },
-            { "optic_ACO_grn",       "",    200,   50    },
-            { "optic_Holosight",     "",    225,   55    },
-            { "optic_Holosight_smg", "",    225,   55    },
+            { "srifle_DMR_01_F",      "",    5250,  2000  },
+            { "10Rnd_762x54_Mag", "",    225,   55    },
             { "optic_Hamr",          "",    450,   200   },
             { "optic_MRCO",          "",    475,   200   },
             { "optic_Arco",          "",    525,   200   }
