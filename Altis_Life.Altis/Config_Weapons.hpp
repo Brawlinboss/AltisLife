@@ -60,8 +60,6 @@ class WeaponShops
         items[] =
         {
             { "arifle_TRG20_F", "", 5250, 2500 },
-			{ "arifle_Mk20C_F", "", 5250, 2500 },
-			{ "arifle_Mk20_F", "", 6250, 2500 },
 			{ "30Rnd_556x45_Stanag", "", 120, 50 },
             { "arifle_Katiba_F", "", 6500, 3250 },
             { "arifle_Katiba_C_F", "", 6000, 2750 },
