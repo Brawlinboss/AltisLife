@@ -94,10 +94,10 @@ switch (_side) do
 		_queryResult set[10,_queryResult select 10];
 		_queryResult set[11,_queryResult select 11];
 		_queryResult set[12,_queryResult select 12];
-		_houseData = _uid spawn TON_fnc_fetchPlayerHouses;
+		_houseData = [_uid] spawn TON_fnc_fetchPlayerHouses;
 		waitUntil {scriptDone _houseData};
 		_queryResult pushBack (missionNamespace getVariable[format["houses_%1",_uid],[]]);
-		_gangData = _uid spawn TON_fnc_queryPlayerGang;
+		_gangData = [_uid] spawn TON_fnc_queryPlayerGang;
 		waitUntil{scriptDone _gangData};
 		_queryResult pushBack (missionNamespace getVariable[format["gang_%1",_uid],[]]);
 	};

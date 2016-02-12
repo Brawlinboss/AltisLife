@@ -57,7 +57,7 @@ switch(playerSide) do
 		life_hunger = SEL(SEL(_this,10),0);
 		life_thirst = SEL(SEL(_this,10),1);
 		life_is_swat = SEL(_this,11);
-		if(SEL(_this,12) == 100) then { life_is_alive = false; };
+		if(SEL(_this,12) == 1) then { life_is_alive = false; };
 		if(life_is_alive) then { player setDamage SEL(_this,12); };
 	};
 
@@ -96,7 +96,7 @@ switch(playerSide) do
 		CONST(life_coplevel,0);
 		life_hunger = SEL(SEL(_this,9),0);
 		life_thirst = SEL(SEL(_this,9),1);
-		if(SEL(_this,10) == 100) then { life_is_alive = false; };
+		if(SEL(_this,10) == 1) then { life_is_alive = false; };
 		if(life_is_alive) then { player setDamage SEL(_this,10); };
 	};
 };

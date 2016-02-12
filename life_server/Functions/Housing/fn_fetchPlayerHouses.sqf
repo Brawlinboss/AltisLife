@@ -8,13 +8,14 @@
 	1. Fetches all the players houses and sets them up.
 	2. Fetches all the players containers and sets them up.
 */
-private["_query","_houses"];
-if(_this == "") exitWith {};
+private["_query","_containers","_containerss","_houses"];
+params [
+	["_uid","",[""]]
+];
+if(_uid == "") exitWith {};
 
-_query = format["SELECT pid, pos, classname, inventory, gear, dir, id FROM containers WHERE pid='%1' AND owned='1'",_this];
-
+_query = format["SELECT pid, pos, classname, inventory, gear, dir, id FROM containers WHERE pid='%1' AND owned='1'",_uid];
 _containers = [_query,2,true] call DB_fnc_asyncCall;
-if(count _containers == 0) exitWith {};
 
 _containerss = [];
 {
@@ -33,7 +34,6 @@ _containerss = [];
 	_container allowDamage false;
 	_container setPosATL _position;
 	_container setVectorDirAndUp _direction;
-
 	//Fix position for more accurate positioning
 	_posX = (_position select 0);
 	_posY = (_position select 1);
@@ -51,39 +51,28 @@ _containerss = [];
 	clearItemCargoGlobal _container;
 	clearMagazineCargoGlobal _container;
 	clearBackpackCargoGlobal _container;
-	if (count _gear > 0) then
-	{
-
+	if (count _gear > 0) then {
 		_items = _gear select 0;
 		_mags = _gear select 1;
 		_weapons = _gear select 2;
 		_backpacks = _gear select 3;
-
-		for "_i" from 0 to ((count (_items select 0)) - 1) do
-		{
+		for "_i" from 0 to ((count (_items select 0)) - 1) do {
 			_container addItemCargoGlobal [((_items select 0) select _i), ((_items select 1) select _i)];
 		};
-
-		for "_i" from 0 to ((count (_mags select 0)) - 1) do
-		{
+		for "_i" from 0 to ((count (_mags select 0)) - 1) do{
 			_container addMagazineCargoGlobal [((_mags select 0) select _i), ((_mags select 1) select _i)];
 		};
-
-		for "_i" from 0 to ((count (_weapons select 0)) - 1) do
-		{
+		for "_i" from 0 to ((count (_weapons select 0)) - 1) do{
 			_container addWeaponCargoGlobal [((_weapons select 0) select _i), ((_weapons select 1) select _i)];
 		};
-
-		for "_i" from 0 to ((count (_backpacks select 0)) - 1) do
-		{
+		for "_i" from 0 to ((count (_backpacks select 0)) - 1) do{
 			_container addBackpackCargoGlobal [((_backpacks select 0) select _i), ((_backpacks select 1) select _i)];
 		};
 	};
 	_house setVariable["containers",_containerss,true];
 } foreach _containers;
 
-_query = format["SELECT pid, pos FROM houses WHERE pid='%1' AND owned='1'",_this];
-
+_query = format["SELECT pid, pos FROM houses WHERE pid='%1' AND owned='1'",_uid];
 _houses = [_query,2,true] call DB_fnc_asyncCall;
 
 _return = [];
@@ -94,8 +83,4 @@ _return = [];
 	_return pushBack [_x select 1,_containerss];
 } foreach _houses;
 
-if(EXTDB_SETTING(getNumber,"DebugMode") == 1) then
-{
-	diag_log format ["Return fetchplayerhouse : %1", _return];
-};
-missionNamespace setVariable[format["houses_%1",_this],_return];
+missionNamespace setVariable[format["houses_%1",_uid],_return];
