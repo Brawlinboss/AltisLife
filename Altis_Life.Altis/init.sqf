@@ -4,3 +4,5 @@ StartProgress = false;
 [] execVM "KRON_Strings.sqf";
 
 StartProgress = true;
+
+_igiload = execVM "IgiLoad\IgiLoadInit.sqf";

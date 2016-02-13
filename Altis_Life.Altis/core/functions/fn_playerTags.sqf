@@ -42,11 +42,11 @@ _masks = LIFE_SETTINGS(getArray,"clothing_masks");
 			_text = switch (true) do {
 				case (_x in (units grpPlayer) && playerSide == civilian): {format["<t color='#00FF00'>%1</t>",(_x GVAR ["realname",name _x])];};
 				case (side _x == west && {!isNil {_x GVAR "rank"}}): {format["<img image='%1' size='1'></img> %2",switch ((_x GVAR "rank")) do {
-					case 2: {"\a3\ui_f\data\gui\cfg\Ranks\corporal_gs.paa"};
-					case 3: {"\a3\ui_f\data\gui\cfg\Ranks\sergeant_gs.paa"};
-					case 4: {"\a3\ui_f\data\gui\cfg\Ranks\lieutenant_gs.paa"};
-					case 5: {"\a3\ui_f\data\gui\cfg\Ranks\captain_gs.paa"};
-					case 6: {"\a3\ui_f\data\gui\cfg\Ranks\major_gs.paa"};
+					case 2: {"\a3\ui_f\data\gui\cfg\Ranks\private_gs.paa"};
+					case 3: {"\a3\ui_f\data\gui\cfg\Ranks\corporal_gs.paa"};
+					case 4: {"\a3\ui_f\data\gui\cfg\Ranks\sergeant_gs.paa"};
+					case 5: {"\a3\ui_f\data\gui\cfg\Ranks\lieutenant_gs.paa"};
+					case 6: {"\a3\ui_f\data\gui\cfg\Ranks\captain_gs.paa"};
 					case 7: {"\a3\ui_f\data\gui\cfg\Ranks\colonel_gs.paa"};
 					case 8: {"\a3\ui_f\data\gui\cfg\Ranks\general_gs.paa"};
 					default {"\a3\ui_f\data\gui\cfg\Ranks\private_gs.paa"};
