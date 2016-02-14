@@ -14,3 +14,5 @@ if(EQUAL(LIFE_SETTINGS(getNumber,"spyglass_init"),1)) then {[] execVM "SpyGlass\
 [] execVM "core\init.sqf";
 [] execVM "welcome_messages.sqf";
 [] execVM "statusBar\statusBar.sqf";
+
+#include "fastrope.sqf";
