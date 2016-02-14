@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `blacklist` tinyint(1) NOT NULL DEFAULT '0',
   `civ_position` text,
   `civ_direction` double NOT NULL DEFAULT '0',
-  `civ_damage` double NOT NULL DEFAULT '0',
+  `civ_damage` double NOT NULL DEFAULT '1',
   `cop_damage` double NOT NULL DEFAULT '0',
   `med_damage` double NOT NULL DEFAULT '0',
   PRIMARY KEY (`uid`),

@@ -32,7 +32,7 @@ _licensesName = "";
 if(_exit) exitWith {hint parseText format[(localize "STR_Shop_Veh_NoLicense")+ "<br/><br/>%1",_licensesName];};
 
 if(_basePrice < 0) exitWith {}; //Bad price entry
-if(CASH < _basePrice) exitWith {hint format[localize "STR_Shop_Veh_NotEnough",[_basePrice - CASH] call life_fnc_numberText];};
+if(CASH < _basePrice && BANK < _basePrice) exitWith {hint format[localize "STR_Shop_Veh_NotEnough",[_basePrice - CASH] call life_fnc_numberText];};
 
 _spawnPoints = SEL(life_veh_shop,1);
 _spawnPoint = "";
@@ -57,7 +57,7 @@ else
 
 
 if(EQUAL(_spawnPoint,"")) exitWith {hint localize "STR_Shop_Veh_Block";};
-SUB(CASH,_basePrice);
+[_basePrice,0] call life_fnc_debitCard;
 hint format[localize "STR_Shop_Veh_Bought",getText(configFile >> "CfgVehicles" >> _className >> "displayName"),[_basePrice] call life_fnc_numberText];
 
 //Spawn the vehicle and prep it.
@@ -85,7 +85,7 @@ else
 [_vehicle] call life_fnc_clearVehicleAmmo;
 [_vehicle,"trunk_in_use",false,true] remoteExecCall ["TON_fnc_setObjVar",RSERV];
 [_vehicle,"vehicle_info_owners",[[getPlayerUID player,profileName]],true] remoteExecCall ["TON_fnc_setObjVar",RSERV];
-_vehicle disableTIEquipment true; //No Thermals.. They're cheap but addictive.
+_vehicle disableTIEquipment true; //Disable Thermals
 
 //Side Specific actions.
 switch(playerSide) do
