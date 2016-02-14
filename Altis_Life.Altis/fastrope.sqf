@@ -1,52 +1,20 @@
 /*
   SHK_Fastrope by Shuko (LDD Kyllikki)
   Version 1.30
-
   Inspired by v1g Fast Rope by [STELS]Zealot (modified by TheRick for Altis Life)
-  
-  Place following into (at the start) initPlayerLocal.sqf
-  
-    #include "SHK_Fastrope.sqf"
-  
-  Access to toss and cut ropes are determined by global variable SHK_Fastrope_AccessLevel
-  0 = everyone (default), 1 = cargo only, 2 = pilots only
-  
-  Fast-roping AI units or groups
-    grpAI call SHK_Fastrope_fnc_AIs
-    [unit1,unit2,unit3] call SHK_Fastrope_fnc_AIs
-  
-  Version history
-    1.30  Changed: Reverted back to free-fall descending instead of attached to rope
-          Fixed:   Only units in cargo can fast-rope. Now grouped AI pilot should not follow
-          Added:   Access level setting for tossing and cutting
-          Added:   Fail-safe to prevent units getting stuck at the lower end of the rope
-    1.21  Fixed:   ACE actions (thanks cyborg111)
-          Added:   Roof detection; detect end of rope instead of ground (for delta_actual)
-    1.20  Added:   Support for ACE interaction menu (for delta_actual)
-          Added:   AI groups can be fast-roped (for iWazaru)
-          Changed: Descending code, now attached to rope instead of slowed free-fall
-    1.11  Added:   Door names for RHS UH60 and UH1 (thanks DÄZ)
-    1.10  Added:   Support for respawn (thanks cyborg111)
-    1.01  Added:   MELB_MH6M (thanks cyborg111)
-    
-  TODO
-    - Queue emptying when ropes are cut too early (by chopper moving)
-    - Multi-rope (one per unit) for CH-47 etc with rear door
-    - More dynamic ropes
 */
 
 
-#define MAX_ALTITUDE_ROPES_AVAIL 70
+#define MAX_ALTITUDE_ROPES_AVAIL 30
 #define MIN_ALTITUDE_ROPES_AVAIL 5
 #define MAX_SPEED_ROPES_AVAIL 50
 
-#define ROPE_LENGTH 75
+#define ROPE_LENGTH 35
 
 #define STR_TOSS_ROPES "Toss ropes"
 #define STR_FAST_ROPE "Fast-rope"
 #define STR_CUT_ROPES "Cut ropes"
 
-#define STR_JOIN_QUEUE_HINT "You're in the fast-rope queue."
 
 // Who can toss and cut ropes
 // 0 = everyone, 1 = cargo only, 2 = pilots only
@@ -57,18 +25,6 @@ SHK_Fastrope_AccessLevel = 0;
 // but specific vehicles should be at the top because first match is used (which could be base class and not the subclass).
 SHK_Fastrope_Helis = [
 
-  //[MELB] Mission Enhanced Little Bird
-  ["MELB_MH6M",[],[[1.2,0.8,-0.1],[-1.2,0.8,-0.1]]],
-  
-  // RHS: Armed Forces of Russian Federation
-  ["RHS_Mi8_base",[],[[0,-3,0]]],
-  ["RHS_Mi24_base",[],[[1.6,3.3,0],[-0.4,3.3,0]]],
-  ["RHS_Ka60_grey",[],[[1.4,1.35,0],[-1.4,1.35,0]]],
-
-  //RHS: United States Armed Forces
-  ["RHS_CH_47F_base",[],[[0,-0.4,0]]],
-  ["RHS_UH60_base",["DoorRB"],[[1.44,1.93,-0.49]]],
-  ["RHS_UH1_base",["DoorLB","DoorRB"],[[0.95,3,-0.9],[-0.95,3,-0.9]]],
     
   // Arma 3
   ["Heli_Light_01_unarmed_base_F",[],[[1.1,0.5,-0.5],[-1.1,0.5,-0.5]]], //Hummingbird
@@ -90,59 +46,7 @@ SHK_Fastrope_fnc_addActions = {
   player addAction["<t color='#00ff00'>"+STR_FAST_ROPE+"</t>", SHK_Fastrope_fnc_queueUp, [], 15, false, false, '','call SHK_Fastrope_fnc_canFastrope'];
 };
 
-// grpAI call SHK_Fastrope_fnc_AIs
-// [unit1,unit2,unit3] call SHK_Fastrope_fnc_AIs
-SHK_Fastrope_fnc_AIs = {
-  params [["_units",[],[[],grpNull]],"_heli"];
 
-  if !(_units isEqualType []) then {
-    _units = units _units;
-  };
-  
-  _heli = objectParent (_units select 0);
-  
-  doStop (driver _heli);
-  (driver _heli) setBehaviour "Careless";
-  (driver _heli) setCombatMode "Blue";
-
-  [_heli, _units] spawn {
-    params ["_heli","_units","_ropes","_rope","_count","_sh",["_i",0]];
-    _sh = _heli spawn SHK_Fastrope_fnc_createRopes;
-    waitUntil {scriptDone _sh};
-    
-
-    _ropes = _heli getVariable ["SHK_Fastrope_Ropes",[]];
-    _count = count _ropes;
-  
-    {
-      if (!alive _x || isPlayer _x || objectParent _x != _heli) then {
-        _units = _units - [_x];
-      };
-    } forEach _units;
-
-    {
-      if (_count > 0) then {
-        if (_count == 2) then {
-          _rope = _ropes select _i;
-          if (_i == 0) then {  _i = 1 } else { _i = 0 };
-        } else {
-          _rope = _ropes select 0;
-        };
-        [_x,_rope] call SHK_Fastrope_fnc_fastRope;
-      };
-    } forEach _units;
-    
-    waituntil {sleep 0.5; { (getPosATL _x select 2) < 1 } count _units == count _units };
-    sleep 3;
-    if ((count (_heli getVariable ["SHK_Fastrope_Ropes",[]])) > 0) then {
-      _heli call SHK_Fastrope_fnc_cutRopes;
-    };
-    sleep 5;
-    (driver _heli) doFollow (leader group (driver _heli));
-    (driver _heli) setBehaviour "Aware";
-    (driver _heli) setCombatMode "White";
-  };
-};
 
 // Check if the player is allowed to drop the ropes
 // Conditions: chopper speed low enough, no ropes attached yet, chopper altitude between given values, suitable access level
@@ -306,84 +210,4 @@ SHK_Fastrope_fnc_hasAccess = {
   if (SHK_Fastrope_AccessLevel == 2 && _role >= 0) then { _roleBool = false }; // No cargo
   
   _roleBool
-};
-
-SHK_Fastrope_fnc_processQueue = {
-  params ["_heli","_queue","_ropes","_count","_rope",["_i",0]];
-  
-  _heli = objectParent player;
-  _queue = _heli getVariable ["SHK_Fastrope_Queue",[]];
-  _ropes = _heli getVariable ["SHK_Fastrope_Ropes",[]];
-  _count = count _ropes;
-
-  waitUntil {_queue find player == 0};
-  hintSilent "";
-  
-  doStop (driver _heli);
-  (driver _heli) setBehaviour "Careless";
-  (driver _heli) setCombatMode "Blue";
-
-  {
-    // Player or an AI in player's group
-    if (_x == player || (group _x == group player && !isPlayer _x)) then {
-      _queue = _queue - [_x];
-      if (_count > 0) then {
-        if (_count == 2) then {
-          _rope = _ropes select _i;
-          if (_i == 0) then {  _i = 1 } else { _i = 0 };
-        } else {
-          _rope = _ropes select 0;
-        };
-        [_x,_rope] call SHK_Fastrope_fnc_fastRope;
-      };
-    };
-  } forEach _queue;
-  
-  _heli setVariable ["SHK_Fastrope_Queue", _queue, true];
-  
-  sleep 5;
-  (driver _heli) doFollow (leader group (driver _heli));
-  (driver _heli) setBehaviour "Aware";
-  (driver _heli) setCombatMode "White";
-};
-
-SHK_Fastrope_fnc_queueUp = {
-  params ["_heli","_queue","_veh"];
-  
-  _heli = objectParent player;
-  _queue = _heli getVariable ["SHK_Fastrope_Queue",[]];
-  
-  _queue pushBack player;
-  hintSilent STR_JOIN_QUEUE_HINT;
-  
-  // If the player is a group leader, queue up his subordinate AIs
-  // Only units in cargo space can fast-rope
-  if (player == leader group player) then {
-    {
-      _veh = objectParent _x;
-      if (!isPlayer _x && _veh == _heli && _heli getCargoIndex _x > -1) then {
-        _queue pushBack _x;
-      };
-    } forEach (units group player);
-  };
-  
-  _heli setVariable ["SHK_Fastrope_Queue", _queue, true];
-  
-  _heli spawn SHK_Fastrope_fnc_processQueue;
-};
-
-// If ACE is loaded, use ACE interaction menu
-if (isClass(configFile >> "CfgPatches" >> "ace_main")) then {
-  private ["_actMenu","_actCreate","_actCut","_actUse"];
-  _actMenu = ["SHK_Fastrope", "Fast-rope", "", {}, {true}] call ace_interact_menu_fnc_createAction;
-  _actCreate = ["SHK_Fastrope_createRopes",STR_TOSS_ROPES, "", SHK_Fastrope_fnc_createRopes, {call SHK_Fastrope_fnc_canCreate}] call ace_interact_menu_fnc_createAction;
-  _actCut = ["SHK_Fastrope_cutRope",STR_CUT_ROPES, "", SHK_Fastrope_fnc_cutRopes, {call SHK_Fastrope_fnc_canCut}] call ace_interact_menu_fnc_createAction;
-  _actUse = ["SHK_Fastrope_fastRope",STR_FAST_ROPE, "", {[] spawn SHK_Fastrope_fnc_queueUp}, {call SHK_Fastrope_fnc_canFastrope}] call ace_interact_menu_fnc_createAction;
-  [player, 1, ["ACE_SelfActions"], _actMenu] call ace_interact_menu_fnc_addActionToObject;
-  [player, 1, ["ACE_SelfActions","SHK_Fastrope"], _actCreate] call ace_interact_menu_fnc_addActionToObject;
-  [player, 1, ["ACE_SelfActions","SHK_Fastrope"], _actCut] call ace_interact_menu_fnc_addActionToObject;
-  [player, 1, ["ACE_SelfActions","SHK_Fastrope"], _actUse] call ace_interact_menu_fnc_addActionToObject;
-} else { // No ACE found, add normal actions
-  call SHK_Fastrope_fnc_addActions;
-  player addEventHandler ["Respawn",{call SHK_Fastrope_fnc_addActions;}];
 };
