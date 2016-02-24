@@ -25,7 +25,7 @@ if((_veh isKindOf "Car") OR (_veh isKindOf "Ship") OR (_veh isKindOf "Air")) the
 	_progress progressSetPosition 0.01;
 	_cP = 0.01;
 
-	if(life_inv_repairKit > 0) then
+	if(life_inv_repairKit > 0 OR playerSide == west) then
 	{
 		life_action_inUse = true;
 		while{true} do

@@ -21,7 +21,7 @@ _mapKey = SEL(actionKeys "ShowMap",0);
 _interruptionKeys = [17,30,31,32]; //A,S,W,D
 
 //Vault handling...
-if((_code in (actionKeys "GetOver") || _code in (actionKeys "salute")) && {(player GVAR ["restrained",false])}) exitWith {
+if((_code in (actionKeys "GetOver") || _code in (actionKeys "salute") || _code in (actionKeys "SitDown") || _code in (actionKeys "Throw") || _code in (actionKeys "GetIn") || _code in (actionKeys "GetOut") || _code in (actionKeys "Fire") || _code in (actionKeys "ReloadMagazine") || _code in [16,18]) && ((player GVAR ["restrained",false]) || (player GVAR ["playerSurrender",false]))) exitWith {
 	true;
 };
 
@@ -130,12 +130,14 @@ switch (_code) do {
 					[vehicle player] call life_fnc_openInventory;
 				};
 			} else {
-				_list = ["landVehicle","Air","Ship","House_F"];
-				if(KINDOF_ARRAY(cursorTarget,_list) && {player distance cursorTarget < 7} && {vehicle player == player} && {alive cursorTarget} && {!life_action_inUse}) then {
-					if(cursorTarget in life_vehicles) then {
-						[cursorTarget] call life_fnc_openInventory;
-					} else {
-						if(!(cursorTarget GVAR ["locked",true])) then {
+				_containers = [getPosATL player, ["Box_IND_Grenades_F","B_supplyCrate_F"], 2.5] call life_fnc_nearestObjects;
+ 				if (count _containers > 0) then {
+ 					_container = _containers select 0;
+ 					[_container] call life_fnc_openInventory;
+ 				} else {
+ 					_list = ["landVehicle","Air","Ship"];
+ 					if(KINDOF_ARRAY(cursorTarget,_list) && {player distance cursorTarget < 7} && {vehicle player == player} && {alive cursorTarget} && {!life_action_inUse}) then {
+						if(cursorTarget in life_vehicles) then {
 							[cursorTarget] call life_fnc_openInventory;
 						};
 					};
@@ -217,7 +219,7 @@ switch (_code) do {
 				_veh = vehicle player;
 			};
 
-			if(_veh isKindOf "House_F" && {playerSide == civilian}) then {
+			if(_veh isKindOf "House_F" OR ((typeOf _veh) in ["Land_i_Shed_Ind_F"]) && {playerSide == civilian}) then {
 				if(_veh in life_vehicles && player distance _veh < 8) then {
 					_door = [_veh] call life_fnc_nearestDoor;
 					if(EQUAL(_door,0)) exitWith {hint localize "STR_House_Door_NotNear"};
@@ -242,6 +244,7 @@ switch (_code) do {
 						} else {
 							[_veh,0] remoteExecCall ["life_fnc_lockVehicle",_veh];
 						};
+						[_veh,"unlock"] remoteExec ["life_fnc_say3D",RANY];
 						systemChat localize "STR_MISC_VehUnlock";
 					} else {
 						if(local _veh) then {
@@ -249,12 +252,23 @@ switch (_code) do {
 						} else {
 							[_veh,2] remoteExecCall ["life_fnc_lockVehicle",_veh];
 						};
+						[_veh,"lock"] remoteExec ["life_fnc_say3D",RANY];
 						systemChat localize "STR_MISC_VehLock";
 					};
 				};
 			};
 		};
 	};
+};
+
+if (life_container_active) then {
+	switch (_code) do {
+		//space key
+		case 57: {
+			[life_container_activeObj] spawn life_fnc_placedefinestorage;
+		};
+	};
+	true;
 };
 
 if (life_barrier_active) then

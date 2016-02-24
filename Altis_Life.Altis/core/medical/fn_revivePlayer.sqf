@@ -11,7 +11,7 @@ _target = param [0,ObjNull,[ObjNull]];
 if(isNull _target) exitWith {};
 _reviveCost = LIFE_SETTINGS(getNumber,"revive_fee");
 
-_revivable = _target GVAR ["Revive",FALSE];
+_revivable = _target GVAR ["Revive",false];
 if(_revivable) exitWith {};
 if(_target GVAR ["Reviving",ObjNull] == player) exitWith {hint localize "STR_Medic_AlreadyReviving";};
 if(player distance _target > 5) exitWith {}; //Not close enough.
@@ -21,7 +21,7 @@ _targetName = _target GVAR ["name","Unknown"];
 _title = format[localize "STR_Medic_Progress",_targetName];
 life_action_inUse = true; //Lockout the controls.
 
-_target SVAR ["Reviving",player,TRUE];
+_target SVAR ["Reviving",player,true];
 //Setup our progress bar
 disableSerialization;
 3 cutRsc ["life_progress","PLAIN"];
@@ -50,7 +50,7 @@ while {true} do
 	if(life_interrupted) exitWith {};
 	if((player GVAR ["restrained",false])) exitWith {};
 	if(player distance _target > 4) exitWith {_badDistance = true;};
-	if(_target GVAR ["Revive",FALSE]) exitWith {};
+	if(_target GVAR ["Revive",false]) exitWith {};
 	if(_target GVAR ["Reviving",ObjNull] != player) exitWith {};
 };
 
@@ -59,18 +59,18 @@ while {true} do
 player playActionNow "stop";
 
 if(_target GVAR ["Reviving",ObjNull] != player) exitWith {hint localize "STR_Medic_AlreadyReviving"};
-_target SVAR ["Reviving",NIL,TRUE];
+_target SVAR ["Reviving",NIL,true];
 
 if(!alive player OR life_istazed) exitWith {life_action_inUse = false;};
-if(_target GVAR ["Revive",FALSE]) exitWith {hint localize "STR_Medic_RevivedRespawned"};
+if(_target GVAR ["Revive",false]) exitWith {hint localize "STR_Medic_RevivedRespawned"};
 if((player GVAR ["restrained",false])) exitWith {life_action_inUse = false;};
 if(!isNil "_badDistance") exitWith {titleText[localize "STR_Medic_TooFar","PLAIN"]; life_action_inUse = false;};
 if(life_interrupted) exitWith {life_interrupted = false; titleText[localize "STR_NOTF_ActionCancel","PLAIN"]; life_action_inUse = false;};
 
-ADD(BANK,_reviveCost);
+if(playerSide == independent) then {ADD(BANK,_reviveCost);};
 
 life_action_inUse = false;
-_target SVAR ["Revive",TRUE,TRUE];
+_target SVAR ["Revive",true,true];
 [profileName] remoteExecCall ["life_fnc_revived",_target];
 titleText[format[localize "STR_Medic_RevivePayReceive",_targetName,[_reviveCost] call life_fnc_numberText],"PLAIN"];
 

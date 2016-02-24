@@ -20,9 +20,17 @@ if(life_is_arrested) then
 }
 else
 {
-	[] call life_fnc_spawnMenu;
-	waitUntil{!isNull (findDisplay 38500)}; //Wait for the spawn selection to be open.
-	waitUntil{isNull (findDisplay 38500)}; //Wait for the spawn selection to be done.
+	if(life_is_alive) then
+	{
+		player setPos life_civ_position;
+		player setDir life_civ_direction;
+	}
+	else
+	{
+		[] call life_fnc_spawnMenu;
+		waitUntil{!isNull (findDisplay 38500)}; //Wait for the spawn selection to be open.
+		waitUntil{isNull (findDisplay 38500)}; //Wait for the spawn selection to be done.
+	};
 };
 
 if(EQUAL(LIFE_SETTINGS(getNumber,"rahim_singleshot"),1)) then

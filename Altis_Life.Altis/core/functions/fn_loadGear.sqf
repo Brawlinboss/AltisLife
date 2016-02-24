@@ -13,25 +13,36 @@ waitUntil {!(isNull (findDisplay 46))};
 _handle = [] spawn life_fnc_stripDownPlayer;
 waitUntil {scriptDone _handle};
 
-if(EQUAL(count _itemArray,0)) exitWith {
-    switch(playerSide) do {
+if(EQUAL(count _itemArray,0)) exitWith
+{
+    switch(playerSide) do
+    {
         case west:
         {
-            if(life_swat_commander OR life_swat_assault OR life_swat_recon) then
+            if(!life_is_undercover && !life_swat_commander && !life_swat_assault && !life_swat_recon) then
             {
-                [] call life_fnc_swatLoadout;
+                [] call life_fnc_copLoadout;
             }
             else
             {
-                [] call life_fnc_copLoadout;
+                if(life_swat_commander OR life_swat_assault OR life_swat_recon) then
+                {
+                    [] call life_fnc_swatLoadout;
+                }
+                else
+                {
+                    [] call life_fnc_ucLoadout;
+                };
             };
         };
 
-        case civilian: {
+        case civilian:
+        {
             [] call life_fnc_civLoadout;
         };
 
-        case independent: {
+        case independent:
+        {
             [] call life_fnc_medicLoadout;
         };
     };
@@ -64,7 +75,8 @@ if(!(EQUAL(_vest,""))) then {_handle = [_vest,true,false,false,false] spawn life
 if(!(EQUAL(_backpack,""))) then {_handle = [_backpack,true,false,false,false] spawn life_fnc_handleItem; waitUntil {scriptDone _handle};};
 
 /* Hotfix for losing virtual items on login */
-if(!isNil {SEL(_this,0)}) then {
+if(!isNil {SEL(_this,0)}) then
+{
 	ADD(life_maxWeight,(round(FETCH_CONFIG2(getNumber,CONFIG_VEHICLES,(backpack player),"maximumload") / 4)));
 };
 
@@ -88,12 +100,14 @@ if(!(EQUAL(_prim,""))) then {_handle = [_prim,true,false,false,false] spawn life
 if(!(EQUAL(_seco,""))) then {_handle = [_seco,true,false,false,false] spawn life_fnc_handleItem; waitUntil {scriptDone _handle};};
 
 {
-    if (!(EQUAL(_x,""))) then {
+    if (!(EQUAL(_x,""))) then
+    {
         player addPrimaryWeaponItem _x;
     };
 } foreach (_pItems);
 {
-    if (!(EQUAL(_x,""))) then {
+    if (!(EQUAL(_x,""))) then
+    {
         player addHandgunItem _x;
     };
 } foreach (_hItems);

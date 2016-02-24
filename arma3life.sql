@@ -21,12 +21,12 @@ DELIMITER $$
 --
 CREATE DEFINER=`altislife`@`localhost` PROCEDURE `resetLifeVehicles`()
 BEGIN
-	UPDATE `vehicles` SET `active`= 0;
+  UPDATE `vehicles` SET `active`= 0;
 END$$
 
 CREATE DEFINER=`altislife`@`localhost` PROCEDURE `deleteDeadVehicles`()
 BEGIN
-	DELETE FROM `vehicles` WHERE `alive` = 0;
+  DELETE FROM `vehicles` WHERE `alive` = 0;
 END$$
 
 CREATE DEFINER=`altislife`@`localhost` PROCEDURE `deleteOldHouses`()
@@ -37,6 +37,11 @@ END$$
 CREATE DEFINER=`altislife`@`localhost` PROCEDURE `deleteOldGangs`()
 BEGIN
   DELETE FROM `gangs` WHERE `active` = 0;
+END$$
+
+CREATE DEFINER=`altislife`@`localhost` PROCEDURE `deleteOldContainers`()
+BEGIN
+  DELETE FROM `containers` WHERE `owned` = 0;
 END$$
 
 DELIMITER ;
@@ -57,20 +62,23 @@ CREATE TABLE IF NOT EXISTS `players` (
   `coplevel` enum('0','1','2','3','4','5','6','7') NOT NULL DEFAULT '0',
   `swatlevel` tinyint(1) NOT NULL DEFAULT '0',
   `mediclevel` enum('0','1','2','3','4','5') NOT NULL DEFAULT '0',
-  `civ_licenses` text,
-  `cop_licenses` text,
-  `med_licenses` text,
+  `civ_licenses` text NOT NULL,
+  `cop_licenses` text NOT NULL,
+  `med_licenses` text NOT NULL,
   `civ_gear` text NOT NULL,
   `cop_gear` text NOT NULL,
   `med_gear` text NOT NULL,
-  `civ_stats` text NOT NULL,
-  `cop_stats` text NOT NULL,
-  `med_stats` text NOT NULL,
+  `undercover_gear` text NOT NULL,
+  `civ_stats` varchar(11) NOT NULL DEFAULT '"[100,100]"',
+  `cop_stats` varchar(11) NOT NULL DEFAULT '"[100,100]"',
+  `med_stats` varchar(11) NOT NULL DEFAULT '"[100,100]"',
   `arrested` tinyint(1) NOT NULL DEFAULT '0',
   `adminlevel` enum('0','1','2','3','4','5') NOT NULL DEFAULT '0',
   `donatorlvl` enum('0','1','2','3','4','5') NOT NULL DEFAULT '0',
   `blacklist` tinyint(1) NOT NULL DEFAULT '0',
-  `civ_damage` double NOT NULL DEFAULT '0',
+  `civ_position` text,
+  `civ_direction` double NOT NULL DEFAULT '0',
+  `civ_damage` double NOT NULL DEFAULT '1',
   `cop_damage` double NOT NULL DEFAULT '0',
   `med_damage` double NOT NULL DEFAULT '0',
   PRIMARY KEY (`uid`),
@@ -114,8 +122,6 @@ CREATE TABLE IF NOT EXISTS `houses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pid` varchar(32) NOT NULL,
   `pos` varchar(64) DEFAULT NULL,
-  `inventory` text,
-  `containers` text,
   `owned` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`,`pid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
@@ -138,6 +144,44 @@ CREATE TABLE IF NOT EXISTS `gangs` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `containers`
+-- Needed for extDB latest update on git
+--
+
+CREATE TABLE IF NOT EXISTS `containers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` varchar(32) NOT NULL,
+  `classname` varchar(32) NOT NULL,
+  `pos` varchar(64) DEFAULT NULL,
+  `inventory` varchar(500) NOT NULL,
+  `gear` text NOT NULL,
+  `dir` varchar(64) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `owned` tinyint(4) DEFAULT '0',
+  PRIMARY KEY (`id`,`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wanted`
+-- Needed for extDB latest update on git
+--
+
+CREATE TABLE `wanted` (
+  `wantedID` varchar(50) NOT NULL,
+  `wantedName` varchar(52) NOT NULL,
+  `wantedCrimes` text NOT NULL,
+  `wantedBounty` int(100) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`wantedID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

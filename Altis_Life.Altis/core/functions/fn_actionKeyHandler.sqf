@@ -7,7 +7,7 @@
 	Master action key handler, handles requests for picking up various items and
 	interacting with other players (Cops = Cop Menu for unrestrain,escort,stop escort, arrest (if near cop hq), etc).
 */
-private["_curTarget","_isWater"];
+private["_curTarget","_isWater","_CrateModelNames","_crate"];
 _curTarget = cursorTarget;
 if(life_action_inUse) exitWith {}; //Action is in use, exit to prevent spamming.
 if(life_interrupted) exitWith {life_interrupted = false;};
@@ -35,10 +35,10 @@ if(isNull _curTarget) exitWith
 	}
 	else
 	{
-		_animal = [position player, ["Sheep_random_F","Goat_random_F","Hen_random_F","Cock_random_F","Rabbit_F"], 3.5] call life_fnc_nearestObjects;
- 		if (count _animal > 0) then
+		_animals = [position player, ["Sheep_random_F","Goat_random_F","Hen_random_F","Cock_random_F","Rabbit_F"], 3] call life_fnc_nearestObjects;
+ 		if (count _animals > 0) then
  		{
- 			_animals = _animal select 0;
+ 			_animals = _animals select 0;
  			if (!alive _animals) then
  			{
  				[_animals] call life_fnc_gutAnimal;
@@ -74,6 +74,14 @@ if(isNull _curTarget) exitWith
 	};
 };
 
+if(_curTarget isKindOf "B_supplyCrate_F" OR _curTarget isKindOf "Box_IND_Grenades_F" && {player distance _curTarget < 3} ) exitWith
+{
+	if (alive _curTarget) then
+	{
+		[_curTarget] call life_fnc_containerMenu;
+	};
+};
+
 if(_curTarget isKindOf "House_F" && {player distance _curTarget < 12} OR ((nearestObject [[16019.5,16952.9,0],"Land_Dome_Big_F"]) == _curTarget OR (nearestObject [[16019.5,16952.9,0],"Land_Research_house_V1_F"]) == _curTarget)) exitWith
 {
 	[_curTarget] call life_fnc_houseMenu;
@@ -91,10 +99,9 @@ life_action_inUse = true;
 };
 
 //Check if it's a dead body.
-if(_curTarget isKindOf "Man" && {!alive _curTarget} && {playerSide in [west,independent]}) exitWith
+if(_curTarget isKindOf "Man" && {!alive _curTarget} && !(_curTarget GVAR["Revive",false]) && {playerSide in [west,independent]}) exitWith
 {
-	//Hotfix code by ins0
-	if(((playerSide == blufor && {(EQUAL(LIFE_SETTINGS(getNumber,"revive_cops"),1))}) || playerSide == independent) && {"Medikit" in (items player)}) then
+	if(life_inv_defibrillator > 0) then
 	{
 		[_curTarget] call life_fnc_revivePlayer;
 	};

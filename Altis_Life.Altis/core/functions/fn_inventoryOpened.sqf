@@ -39,3 +39,5 @@ if(_container isKindOf "Man" && !alive _container) exitWith {
 	hint localize "STR_NOTF_NoLootingPerson";
 	true;
 };
+
+[] call life_fnc_playerSkins;

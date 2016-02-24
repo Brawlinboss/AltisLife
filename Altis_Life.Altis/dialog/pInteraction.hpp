@@ -47,7 +47,6 @@ class pInteraction_Menu
 		class ButtonClose : life_RscButtonMenu
 		{
 			idc = -1;
-			//shortcuts[] = {0x00050000 + 2};
 			text = "$STR_Global_Close";
 			onButtonClick = "closeDialog 0;";
 			x = BGX;
@@ -199,7 +198,6 @@ class vInteraction_Menu
 		class ButtonClose : life_RscButtonMenu
 		{
 			idc = -1;
-			//shortcuts[] = {0x00050000 + 2};
 			text = "$STR_Global_Close";
 			onButtonClick = "closeDialog 0;";
 			x = BGX;

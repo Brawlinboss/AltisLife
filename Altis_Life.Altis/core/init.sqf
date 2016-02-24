@@ -94,6 +94,8 @@ switch (playerSide) do
 player SVAR ["restrained",false,true];
 player SVAR ["Escorting",false,true];
 player SVAR ["transporting",false,true];
+player SVAR ["bloodBagged",false,true];
+player SVAR ["playerSurrender",false,true];
 
 diag_log "Past Settings Init";
 [] execFSM "core\fsm\client.fsm";
@@ -117,7 +119,7 @@ life_sidechat = true;
 0 cutText ["","BLACK IN"];
 
 /* Set up frame-by-frame handlers */
-//LIFE_ID_PlayerTags = ["LIFE_PlayerTags","onEachFrame","life_fnc_playerTags"] call BIS_fnc_addStackedEventHandler;
+LIFE_ID_PlayerTags = ["LIFE_PlayerTags","onEachFrame","life_fnc_playerTags"] call BIS_fnc_addStackedEventHandler;
 LIFE_ID_RevealObjects = ["LIFE_RevealObjects","onEachFrame","life_fnc_revealObjects"] call BIS_fnc_addStackedEventHandler;
 
 player SVAR ["steam64ID",steamid];
@@ -125,7 +127,9 @@ player SVAR ["realname",profileName,true];
 
 life_fnc_moveIn = compileFinal
 "
+	life_disable_getIn = false;
 	player moveInCargo (_this select 0);
+	life_disable_getOut = true;
 ";
 
 [] spawn life_fnc_survival;
@@ -142,3 +146,5 @@ life_fnc_moveIn = compileFinal
 
 CONSTVAR(life_paycheck); //Make the paycheck static.
 if(EQUAL(LIFE_SETTINGS(getNumber,"enable_fatigue"),0)) then {player enableFatigue false;};
+[] execVM "core\fn_Setup_Station_Service.sqf";
+[getPlayerUID player,player getVariable["realname",name player]] remoteExec ["life_fnc_wantedProfUpdate",RSERV];

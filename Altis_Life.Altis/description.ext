@@ -1,11 +1,10 @@
-author = "Tonic";
-onLoadName = "Altis Life RPG v4.3.1";
-onLoadMission = "An RPG game mode developed by Tonic";
+author = "Tonic & Modified by Jesse S & Fuzionz";
 joinUnassigned = 1;
 respawn = BASE;
 respawndelay = 5;
 disabledAI = 1;
 disableChannels[]={0,1,2};
+loadScreen = "textures\armalife.jpg";
 enableDebugConsole = 2;
 respawnDialog = 0;
 saving = 0;
@@ -14,7 +13,7 @@ class Header
 {
 	gameType = RPG;
 	minPlayers = 1;
-	maxPlayers = 75;
+	maxPlayers = 142;
 };
 
 wreckLimit = 3;
@@ -81,6 +80,22 @@ class CfgSounds
 		sound[] = {"\sounds\flashbang.ogg", 1.0, 1};
 		titles[] = {};
 	};
+
+	class unlock
+	{
+		name = "unlock";
+		sound[] = {"\sounds\unlock.ogg", 0.25, 1};
+		titles[] = {};
+	};
+
+	class lock
+	{
+		name = "lock";
+		sound[] = {"\sounds\lock.ogg", 0.25, 1};
+		titles[] = {};
+	};
+
+
 };
 
 class CfgDebriefing
@@ -90,6 +105,16 @@ class CfgDebriefing
 		title = "Mission Failed";
 		subtitle = "You are not white-listed to use this slot";
 		description = "You are not allowed to use this slot because you do not have the appropriate permissions, try another slot.";
+		pictureBackground = "";
+		picture = "";
+		pictureColor[] = {0,0.3,0.6,1};
+	};
+
+	class NotSetup
+	{
+		title = "Unavailable Slot";
+		subtitle = "You chose a slot that is in development!";
+		description = "This slot will be available soon! Watch the patch notes!";
 		pictureBackground = "";
 		picture = "";
 		pictureColor[] = {0,0.3,0.6,1};

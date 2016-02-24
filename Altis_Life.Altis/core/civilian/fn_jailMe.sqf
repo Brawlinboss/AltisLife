@@ -1,7 +1,7 @@
 #include "..\..\script_macros.hpp"
 /*
 	Author Bryan "Tonic" Boardwine
-	
+
 	Description:
 	Once word is received by the server the rest of the jail execution is completed.
 */
@@ -19,38 +19,46 @@ if(count _ret > 0) then { life_bail_amount = SEL(_ret,3); } else { life_bail_amo
 _esc = false;
 _bail = false;
 
-[_bad] spawn {
+[_bad] spawn
+{
 	life_canpay_bail = false;
-	if(_this select 0) then {
+	if(_this select 0) then
+	{
+		sleep (15 * 60);
+	}
+	else
+	{
 		sleep (10 * 60);
-	} else {
-		sleep (5 * 60);
 	};
 	life_canpay_bail = nil;
 };
 
-while {true} do {
-	if((round(_time - time)) > 0) then {
+while {true} do
+{
+	if((round(_time - time)) > 0) then
+	{
 		_countDown = [(_time - time),"MM:SS.MS"] call BIS_fnc_secondsToString;
 		hintSilent parseText format[(localize "STR_Jail_Time")+ "<br/> <t size='2'><t color='#FF0000'>%1</t></t><br/><br/>" +(localize "STR_Jail_Pay")+ " %3<br/>" +(localize "STR_Jail_Price")+ " $%2",_countDown,[life_bail_amount] call life_fnc_numberText,if(isNil "life_canpay_bail") then {"Yes"} else {"No"}];
 	};
-	
-	if(player distance (getMarkerPos "jail_marker") > 60) exitWith {
-		_esc = true;
+
+	if(player distance (getMarkerPos "jail_marker") > 40) then
+	{
+		player setPos (getMarkerPos "jail_marker");
+		//_esc = true; (sets player as escaped)
 	};
-	
-	if(life_bail_paid) exitWith {
-		_bail = true;
-	};
-	
+
+	if(life_bail_paid) exitWith { _bail = true;	};
+
 	if((round(_time - time)) < 1) exitWith {hint ""};
 	if(!alive player && ((round(_time - time)) > 0)) exitWith {};
 	sleep 0.1;
 };
 
 
-switch (true) do {
-	case (_bail): {
+switch (true) do
+{
+	case (_bail):
+	{
 		life_is_arrested = false;
 		life_bail_paid = false;
 		hint localize "STR_Jail_Paid";
@@ -59,7 +67,8 @@ switch (true) do {
 		[getPlayerUID player] remoteExecCall ["life_fnc_wantedRemove",RSERV];
 		[5] call SOCK_fnc_updatePartial;
 	};
-	
+
+	/* Not in use at the moment...
 	case (_esc): {
 		life_is_arrested = false;
 		hint localize "STR_Jail_EscapeSelf";
@@ -67,8 +76,10 @@ switch (true) do {
 		[getPlayerUID player,profileName,"901"] remoteExecCall ["life_fnc_wantedAdd",RSERV];
 		[5] call SOCK_fnc_updatePartial;
 	};
-	
-	case (alive player && !_esc && !_bail): {
+	*/
+
+	case (alive player && !_bail):
+	{
 		life_is_arrested = false;
 		hint localize "STR_Jail_Released";
 		[getPlayerUID player] remoteExecCall ["life_fnc_wantedRemove",RSERV];

@@ -48,6 +48,8 @@ class Life_Client_Core
 	class Medical_System
 	{
 		file = "core\medical";
+		class bloodbag {};
+		class bloodbagself {};
 		class deathScreen {};
 		class medicLights {};
 		class medicLoadout {};
@@ -81,6 +83,7 @@ class Life_Client_Core
 		class impoundAction {};
 		class mkDowning {};
 		class packupSpikes {};
+		class pickaxeUse {};
 		class pickupItem {};
 		class pickupMoney {};
 		class postBail {};
@@ -89,6 +92,7 @@ class Life_Client_Core
 		class pushVehicle {};
 		class putInCar {};
 		class repairTruck {};
+		class removeContainer {};
 		class restrainAction {};
 		class robAction {};
 		class robBank {};
@@ -109,6 +113,7 @@ class Life_Client_Core
 	{
 		file = "core\housing";
 		class buyHouse {};
+		class containerMenu {};
 		class copBreakDoor {};
 		class copHouseOwner {};
 		class garageRefund {};
@@ -119,6 +124,8 @@ class Life_Client_Core
 		class lightHouseAction {};
 		class lockHouse {};
 		class lockupHouse {};
+		class placeContainer {};
+		class PlayerInBuilding {};
 		class raidHouse {};
 		class sellHouse {};
 	};
@@ -155,6 +162,7 @@ class Life_Client_Core
 		class wantedInfo {};
 		class wantedList {};
 		class wantedMenu {};
+		class wantedAddP {};
 	};
 
 	class Functions
@@ -244,6 +252,7 @@ class Life_Client_Core
 		class addVehicle2Chain {};
 		class colorVehicle {};
 		class deviceMine {};
+		class FuelRefuelcar {};
 		class lockVehicle {};
 		class openInventory {};
 		class vehicleOwners {};
@@ -271,6 +280,7 @@ class Life_Client_Core
 		file = "core\cop";
 		class airhorn {};
 		class bountyReceive {};
+		class containerInvSearch {};
 		class copEnter {};
 		class copInteractionMenu {};
 		class copLights {};
@@ -296,12 +306,19 @@ class Life_Client_Core
 		class ticketPay {};
 		class ticketPrompt {};
 		class vehInvSearch {};
+		class wantedGrab {};
 	};
 
 	class Swat
 	{
 		file = "core\cop\swat";
 		class swatLoadout {};
+	};
+
+	class Undercover
+	{
+		file = "core\cop\undercover";
+		class ucLoadout {};
 	};
 
 	class Gangs
@@ -332,6 +349,8 @@ class Life_Client_Core
 		class chopShopSell {};
 		class clothingFilter {};
 		class clothingMenu {};
+		class FuelStatOpen {};
+ 		class FuelLBchange {};
 		class vehicleShopBuy {};
 		class vehicleShopLBChange {};
 		class vehicleShopMenu {};
@@ -350,13 +369,17 @@ class Life_Client_Core
 		file = "core\items";
 		class blastingCharge {};
 		class boltcutter {};
+		class debitCard {};
 		class defuseKit {};
 		class flashbang {};
 		class jerryRefuel {};
 		class lockpick {};
-		class pickaxeUse {};
 		class spikeStrip {};
-		class storageBox {};
+		class storageBoxBig {};
+		class storageBoxSmall {};
+		class placestorageBig {};
+		class placestorageSmall {};
+		class placedefinestorage {};
 	};
 
 	class Dialog_Controls
@@ -367,6 +390,7 @@ class Life_Client_Core
 		class bankWithdraw {};
 		class displayHandler {};
 		class gangDeposit {};
+		class gangWithdraw {};
 		class garageLBChange {};
 		class impoundMenu {};
 		class progressBar {};

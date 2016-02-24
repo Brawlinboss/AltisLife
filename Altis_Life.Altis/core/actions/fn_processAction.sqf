@@ -69,8 +69,8 @@ if(_var2) then
 	};
 };
 
-if(_error1) exitWith{hint format["You have too much %1, you need equal amounts",_oldItem];};
-if(_error2) exitWith{hint format["You have too much %1, you need equal amounts",_oldItem2];};
+if(_error1) exitWith{hint format["You have too much %1, you need equal amounts",localize _oldItem];};
+if(_error2) exitWith{hint format["You have too much %1, you need equal amounts",localize _oldItem2];};
 
 _cost = _cost * _oldVal;
 
@@ -104,19 +104,19 @@ if(_hasLicense) then
 	if(!([false,_oldItem,_oldVal] call life_fnc_handleInv)) exitWith {3 cutText ["","PLAIN"]; life_is_processing = false;};
 	if(!([true,_newItem,_oldVal] call life_fnc_handleInv)) exitWith {3 cutText ["","PLAIN"]; [true,_oldItem,_oldVal] call life_fnc_handleInv; life_is_processing = false;};
 	3 cutText ["","PLAIN"];
-	titleText[format[localize "STR_Process_Processed",_oldVal,_itemName],"PLAIN"];
+	titleText[format[localize "STR_Process_Processed",localize _oldVal,localize _itemName],"PLAIN"];
 	life_is_processing = false;
 
 	if(_var2) then
 	{
 		([false,_oldItem2,_oldVal2] call life_fnc_handleInv);
 		3 cutText ["","PLAIN"];
-		titleText[format["You have processed %1 and %2 into %3.",_oldItem,_oldItem2,_itemName],"PLAIN"];
+		titleText[format["You have processed %1 and %2 into %3.",localize _oldItem,localize _oldItem2,localize _itemName],"PLAIN"];
 	}
 	else
 	{
 		3 cutText ["","PLAIN"];
-		titleText[format["You have processed %1 into %2.",_oldItem,_itemName],"PLAIN"];
+		titleText[format["You have processed %1 into %2.",localize _oldItem,localize _itemName],"PLAIN"];
 	};
 
 life_is_processing = false;
@@ -142,18 +142,18 @@ else
 	if(!([true,_newItem,_oldVal] call life_fnc_handleInv)) exitWith {3 cutText ["","PLAIN"]; [true,_oldItem,_oldVal] call life_fnc_handleInv; life_is_processing = false;};
 	3 cutText ["","PLAIN"];
 
-	titleText[format[localize "STR_Process_Processed2",_oldVal,_itemName,[_cost] call life_fnc_numberText],"PLAIN"];
+	titleText[format[localize "STR_Process_Processed2",localize _oldVal,localize _itemName,[_cost] call life_fnc_numberText],"PLAIN"];
 
 	if(_var2) then
 	{
 		([false,_oldItem2,_oldVal2] call life_fnc_handleInv);
 		3 cutText ["","PLAIN"];
-		titleText[format["You have processed %1 and %2 into %3 for %4.",_oldItem,_oldItem2,_itemName,[_cost] call life_fnc_numberText],"PLAIN"];
+		titleText[format["You have processed %1 and %2 into %3 for %4.",localize _oldItem,localize _oldItem2,localize _itemName,[_cost] call life_fnc_numberText],"PLAIN"];
 	}
 	else
 	{
 		3 cutText ["","PLAIN"];
-		titleText[format["You have processed %1 into %2 for %3.",_oldVal,_itemName,[_cost] call life_fnc_numberText],"PLAIN"];
+		titleText[format["You have processed %1 into %2 for %3.",localize _oldVal,localize _itemName,[_cost] call life_fnc_numberText],"PLAIN"];
 	};
 
 	SUB(BANK,_cost);

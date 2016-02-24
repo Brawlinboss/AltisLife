@@ -33,7 +33,6 @@ if(_action) then
 	[_uid,_house] remoteExec ["TON_fnc_addHouse",RSERV];
 	_house SVAR ["house_owner",[_uid,profileName],true];
 	_house SVAR ["locked",true,true];
-	_house SVAR ["Trunk",[[],0],true];
 	_house SVAR ["containers",[],true];
 	_house SVAR ["uid",floor(random 99999),true];
 

@@ -39,6 +39,15 @@ life_markers = false;
 life_swat_commander = false;
 life_swat_recon = false;
 life_swat_assault = false;
+life_is_undercover = false;
+life_fed_break = 0;
+life_dead_gear = [];
+life_container_activeObj = ObjNull;
+life_disable_getIn = false;
+life_disable_getOut = false;
+life_is_alive = true;
+life_civ_position = [0,0,0];
+life_civ_direction = 0;
 
 //Uniform price (0),Hat Price (1),Glasses Price (2),Vest Price (3),Backpack Price (4)
 life_clothing_purchase = [-1,-1,-1,-1,-1];

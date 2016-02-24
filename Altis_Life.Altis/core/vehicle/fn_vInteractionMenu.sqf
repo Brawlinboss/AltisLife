@@ -24,12 +24,12 @@ _isVehicle = if((_curTarget isKindOf "landVehicle") OR (_curTarget isKindOf "Shi
 if(!_isVehicle) exitWith {closeDialog 0;};
 
 _display = findDisplay 37400;
-_Btn1 = _display displayCtrl Btn1;
-_Btn2 = _display displayCtrl Btn2;
-_Btn3 = _display displayCtrl Btn3;
-_Btn4 = _display displayCtrl Btn4;
-_Btn5 = _display displayCtrl Btn5;
-_Btn6 = _display displayCtrl Btn6;
+_Btn4 = _display displayCtrl Btn1;
+_Btn1 = _display displayCtrl Btn2;
+_Btn6 = _display displayCtrl Btn3;
+_Btn2 = _display displayCtrl Btn4;
+_Btn3 = _display displayCtrl Btn5;
+_Btn5 = _display displayCtrl Btn6;
 _Btn7 = _display displayCtrl Btn7;
 life_vInact_curTarget = _curTarget;
 
@@ -79,7 +79,7 @@ if(playerSide == west) then
 		else
 		{
 			_Btn6 ctrlSetText localize "STR_vInAct_Unflip";
-			_Btn6 buttonSetAction "life_vInact_curTarget setPos [getPos life_vInact_curTarget select 0, getPos life_vInact_curTarget select 1, (getPos life_vInact_curTarget select 2)+0.5]; closeDialog 0;";
+			_Btn6 buttonSetAction "life_vInact_curTarget setPos [getPos life_vInact_curTarget select 0, getPos life_vInact_curTarget select 1, (getPos life_vInact_curTarget select 2)+1.5]; closeDialog 0;";
 			if(count crew _curTarget == 0 && {canMove _curTarget}) then { _Btn6 ctrlEnable false;} else {_Btn6 ctrlEnable true;};
 		};
 	};

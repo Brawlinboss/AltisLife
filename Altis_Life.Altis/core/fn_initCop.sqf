@@ -26,6 +26,12 @@ if(str(player) in ["swat_1","swat_2","swat_3","swat_4","swat_5"]) then
 	};
 };
 
+if(str(player) in ["undercover_1","undercover_2","undercover_3"]) then
+{
+	["NotSetup",false,true] call BIS_fnc_endMission;
+	sleep 30;
+};
+
 if((FETCH_CONST(life_coplevel) == 0) && (FETCH_CONST(life_adminlevel) == 0)) then
 {
 	["NotWhitelisted",false,true] call BIS_fnc_endMission;
@@ -35,6 +41,7 @@ if((FETCH_CONST(life_coplevel) == 0) && (FETCH_CONST(life_adminlevel) == 0)) the
 if(str(player) in ["swat_1"]) then { life_swat_commander = true; };
 if(str(player) in ["swat_2"]) then { life_swat_recon = true; };
 if(str(player) in ["swat_3","swat_4","swat_5"]) then { life_swat_assault = true; };
+if(str(player) in ["undercover_1","undercover_2","undercover_3"]) then { life_is_undercover = true; };
 
 if(life_swat_assault OR life_swat_recon OR life_swat_commander) then {[] call life_fnc_swatLoadout;};
 

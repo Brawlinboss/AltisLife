@@ -16,6 +16,9 @@
       <Portuguese>Loja de Roupas Rebeldes</Portuguese>
       <Polish>Sklep samobójców AKBAR</Polish>
     </Key>
+	<Key ID="STR_Shops_Cop_Rebel">
+      <Original>Undercover Rebel Clothing</Original>
+    </Key>
     <Key ID="STR_Shops_C_Diving">
       <Original>Steve's Diving Shop</Original>
       <Portuguese>Loja de equipamentos para Mergulho</Portuguese>
@@ -215,6 +218,11 @@
       <Italian>Vendi</Italian>
       <Portuguese>Vender</Portuguese>
       <Polish>Sprzedaj</Polish>
+    </Key>
+	<Key ID="STR_Global_Delete">
+      <Original>Remove</Original>
+      <French>Supprimer</French>
+	  <Portuguese>Remover</Portuguese>
     </Key>
     <Key ID="STR_Global_Buy">
       <Original>Buy</Original>
@@ -595,6 +603,16 @@
       <Portuguese>Você não tem dinheiro suficiente na suca conta bancária. Para trasferir R$%1 você irá pagar R$%2 de taxa</Portuguese>
       <Polish>Nie masz wystarczająco dużo środków na końcie, do przelewu $%1 będziesz potrzebował jeszcze $%2 na opłatę</Polish>
     </Key>
+	<Key ID="STR_ATM_NotEnoughFundsG">
+      <Original>You don't have that much in your gang!</Original>
+      <French>Vous n'avez pas autant dans votre gang</French>
+      <Portuguese>Você não tem todo esse dinhero na sua gangue!</Portuguese>
+    </Key>
+	<Key ID="STR_ATM_WithdrawSuccessG">
+      <Original>You have withdrawn $%1 from your gang</Original>
+      <French>Vous avez retiré $%1 de votre gang</French>
+      <Portuguese>Você sacou R$%1 da sua gangue</Portuguese>
+    </Key>
     <Key ID="STR_ATM_SentMoneySuccess">
       <Original>You have transfered $%1 to %2.\n\nA tax fee of $%3 was taken for the wire transfer.</Original>
       <German>Du hast $%1 an %2 überwiesen.\n\nEine Gebühr von $%3 wurde verrechnet.</German>
@@ -635,7 +653,15 @@
       <Portuguese>Você não tem todo esse dinheiro.</Portuguese>
       <Polish>Nie masz przy sobie tyle pieniędzy</Polish>
     </Key>
-    <Key ID="STR_ATM_DepositGang">
+	<Key ID="STR_ATM_DepositSuccess">
+      <Original>You have deposited $%1 into your bank account</Original>
+      <German>Du hast $%1 auf dein Bankkonto überwiesen</German>
+      <French>Vous avez déposé $%1 dans votre compte bancaire</French>
+      <Italian>Hai despositato €%1 nel tuo conto bancario</Italian>
+      <Portuguese>Você depositou R$%1 na sua conta bancária</Portuguese>
+      <Polish>Zdeponowałeś na koncie bankowym $%1</Polish>
+    </Key>
+    <Key ID="STR_ATM_DepositSuccessG">
       <Original>You have deposited $%1 into your gangs bank account</Original>
       <German>Du hast $%1 auf dein Gang Konto überwiesen</German>
       <French>Vous avez déposé $%1 sur le compte bancaire de votre gang.</French>
@@ -1199,7 +1225,7 @@
     </Key>
     	<Key ID="STR_Boat_Garage_Title">
       <Original>Boat Garage</Original>
-      <German>Bootsgarage</Germaan>
+      <German>Bootsgarage</German>
       <French>Bateau Garage</French>
       <Italian>Garage Barca</Italian>
       <Portuguese>Garagem de Barco</Portuguese>
@@ -1541,12 +1567,12 @@
       <Polish>Tagi OFF</Polish>
     </Key>
     <Key ID="STR_SM_SC">
-      <Original>Sidechat Settings</Original>
-      <German>Sidechat Einstellungen</German>
-      <French>Sidechat Paramètres</French>
-      <Italian>Impostazioni chat fazione</Italian>
-      <Portuguese>Configurações de Sidechat</Portuguese>
-      <Polish>Ustawienia czatu</Polish>
+      <Original>Sidechat Switch</Original>
+      <Portuguese>Habilitar Sidechat</Portuguese>
+    </Key>
+	<Key ID="STR_SM_RNObj">
+      <Original>Reveal Nearest Objects</Original>
+      <Portuguese>Mostrar Objetos Próximos</Portuguese>
     </Key>
     <Key ID="STR_SM_SCOFF">
       <Original>Sidechat OFF</Original>
@@ -1699,8 +1725,7 @@
       <German>Fahndungsliste</German>
       <French>Interpol</French>
       <Italian>Lista Ricercati</Italian>
-      <Portuguese>Procurados</Portuguese>
-      <Polish>Listy gończe</Polish>
+      <Portuguese>Lista de Procurados</Portuguese>
     </Key>
     <Key ID="STR_Wanted_Pardon">
       <Original>Pardon</Original>
@@ -1708,7 +1733,34 @@
       <French>Excuser</French>
       <Italian>Perdona</Italian>
       <Portuguese>Perdão</Portuguese>
-      <Polish>Usuń z listy</Polish>
+    </Key>
+    <Key ID="STR_Wanted_Add">
+      <Original>Add</Original>
+      <Portuguese>Adicionar</Portuguese>
+    </Key>
+    <Key ID="STR_Wanted_People">
+      <Original>Wanted People</Original>
+      <Portuguese>Pessoas Procuradas</Portuguese>
+    </Key>
+    <Key ID="STR_Wanted_Citizens">
+      <Original>Citizens</Original>
+      <Portuguese>Cidadãos</Portuguese>
+    </Key>
+    <Key ID="STR_Wanted_Crimes">
+      <Original>Crimes</Original>
+      <Portuguese>Crimes</Portuguese>
+    </Key>
+    <Key ID="STR_Wanted_AddP">
+      <Original>%1 has been added to the wanted list.</Original>
+      <Portuguese>%1 foi adicionado a lista de procurados.</Portuguese>
+    </Key>
+    <Key ID="STR_Wanted_Count">
+      <Original>%1 count(s) of %2</Original>
+      <Portuguese>%1 contagem(s) de %2</Portuguese>
+    </Key>
+    <Key ID="STR_Wanted_Bounty">
+      <Original>Current Bounty Price: $%1</Original>
+      <Portuguese>Atual recompensa: R$%1</Portuguese>
     </Key>
   </Package>
   <Package name="Animals">
@@ -1771,7 +1823,7 @@
   </Package>
   <Package name="Notifications">
     <Key ID="STR_NOTF_NE_1">
-      <Original>You do not have $%1 for a %2</Original>
+      <Original>You do not have $%1 in your bank for a %2</Original>
       <German>Du hast keine $%1 für einen %2</German>
       <French>Tu n'as pas %1$ pour cet élément : %2</French>
       <Italian>Non hai €%1 per $2</Italian>
@@ -2250,6 +2302,14 @@
       <Portuguese>Você foi retirado do veículo</Portuguese>
       <Polish>Zostałeś wyciągnięty z pojazdu</Polish>
     </Key>
+	<Key ID="STR_NOTF_ContainerContraband">
+      <Original>A container of house was searched and has $%1 worth of drugs / contraband.</Original>
+      <German>Ein Fahrzeug wurde durchsucht und es wurden Drogen / Schmuggelware im Wert von $%1 gefunden.</German>
+      <French>Un container de maison venant d'être fouillé avait $%1 de drogue / contrebande.</French>
+      <Italian>Un veidolo è stato ispezionato e sono stati sequestrati €%1 in materiale illegale.</Italian>
+      <Portuguese>O veículo foi revistado e tem R$%1 em drogas ou contrabandos</Portuguese>
+      <Polish>Podczas przeszukania znalezono narkotyki/kontrabandę o wartości $%1</Polish>
+    </Key>
     <Key ID="STR_NOTF_GivenItem">
       <Original>%1 has gave you %2 %3</Original>
       <German>%1 hat dir %2 %3 gegeben</German>
@@ -2627,12 +2687,12 @@
       <Polish>Ktoś właśnie włamuje się do sejfu!</Polish>
     </Key>
     <Key ID="STR_Civ_NotEnoughCops">
-      <Original>There needs to be 5 or more cops online to continue.</Original>
-      <German>Es müssen 5 oder mehr Polizisten online sein, um fortfahren zu können.</German>
-      <French>Il faut au minimum 5 flic pour continuer</French>
-      <Italian>Servono almeno 5 poliziotti online per continuare.</Italian>
-      <Portuguese>É necessário ter pelo menos 5 Policiais online para continuar.</Portuguese>
-      <Polish>Potrzeba conajmniej 5 policjantów aby kontynuować</Polish>
+      <Original>There needs to be %1 or more cops online to continue.</Original>
+      <German>Es müssen %1 oder mehr Polizisten online sein, um fortfahren zu können.</German>
+      <French>Il faut au minimum %1 flic pour continuer</French>
+      <Italian>Servono almeno %1 poliziotti online per continuare.</Italian>
+      <Portuguese>É necessário ter %1 ou mais policiais online para continuar.</Portuguese>
+      <Polish>Potrzeba conajmniej %1 policjantów aby kontynuować</Polish>
     </Key>
     <Key ID="STR_Civ_SafeInv">
       <Original>Safe Inventory</Original>
@@ -2867,6 +2927,14 @@
       <Italian>Questo veicolo è vuoto</Italian>
       <Portuguese>Esse veículo está vazio</Portuguese>
       <Polish>Pojazd jest pusty</Polish>
+    </Key>
+	<Key ID="STR_Cop_ContainerEmpty">
+      <Original>This container is empty</Original>
+      <French>Ce container est vide</French>
+    </Key>
+	<Key ID="STR_Cop_NoIllegalCOntainer">
+      <Original>Nothing illegal in this coontainer</Original>
+      <French>Rien d'illégal dans ce container</French>
     </Key>
     <Key ID="STR_Cop_RobberDead">
       <Original>$%1 from the Federal Reserve robbery was returned from the robber being killed.</Original>
@@ -3234,6 +3302,14 @@
       <Portuguese>Você so pode acessar a caixa se o dono deixar ela aberta.</Portuguese>
       <Polish>Nie masz dostępu do pojemnika dopóki właściciel go nie otworzy.</Polish>
     </Key>
+	<Key ID="STR_House_Container_House_Near">
+      <Original>There are no houses near you.</Original>
+      <French>Il n'y a aucune maison près de vous.</French>
+    </Key>
+    <Key ID="STR_House_Container_House_Near_Owner">
+      <Original>You are not the owner of the house.</Original>
+      <French>Vous n'êtes pas le propriétaire de la maison.</French>
+    </Key>
     <Key ID="STR_House_Door_Unlock">
       <Original>You have unlocked the door.</Original>
       <German>Du hast die Tür aufgeschlossen.</German>
@@ -3437,6 +3513,10 @@
       <Portuguese>Você tem certeza que deseja vender a casa? O valor de venda é: &lt;t color='#8cff9b'&gt;R$%1&lt;/t&gt;</Portuguese>
       <Polish>Jesteś pewny że chcesz sprzedać dom za &lt;t color='#8cff9b'&gt;$%1&lt;/t&gt;</Polish>
     </Key>
+	<Key ID="STR_House_DeleteContainerMSG">
+      <Original>Are you sure you want to remove it?? </Original>
+      <Portuguese>Você tem certeza que quer remover isso?</Portuguese>
+    </Key>
   </Package>
   <Package name="Vehicle_Service">
     <Key ID="STR_Service_Chopper_NoAir">
@@ -3489,6 +3569,9 @@
       <Portuguese>Maconha não Processada</Portuguese>
       <Polish>Konopie</Polish>
     </Key>
+	<Key ID="STR_Item_debitCard">
+	  <Original>Debit Card</Original>
+	</Key>
     <Key ID="STR_Item_Apple">
       <Original>Apple</Original>
       <German>Apfel</German>
@@ -3745,6 +3828,9 @@
       <Portuguese>Carne de Cabra Crua</Portuguese>
       <Polish>Surowa Koza</Polish>
     </Key>
+	<Key ID="STR_Item_Campfire">
+	  <Original>Campfire</Original>
+	</Key>
     <Key ID="STR_Item_Goat">
       <Original>Grilled Goat</Original>
       <German>Gegrilltes Ziegenfleisch</German>
@@ -4389,6 +4475,14 @@
       <Portuguese>Você não esta olhando para a porta.</Portuguese>
       <Polish>Nie patrzysz w stronę drzwi.</Polish>
     </Key>
+	<Key ID="STR_ISTR_Blast_Exploit">
+      <Original>You must open the container before placing the charger!</Original>
+      <Portuguese>Você deve abrir o container antes de colocar o explosivo!</Portuguese>
+    </Key>
+	<Key ID="STR_ISTR_Bolt_Exploit">
+      <Original>You must open the outside doors before opening it!</Original>
+      <Portuguese>Você deve abrir as portas externas antes de abrir essa!</Portuguese>
+    </Key>
     <Key ID="STR_ISTR_Bolt_AlertFed">
       <Original>!!!!! SOMEONE IS BREAKING INTO THE FEDERAL RESERVE !!!!!!</Original>
       <German>!!!!! JEMAND BRICHT IN DIE ZENTRALBANK EIN !!!!!!</German>
@@ -4972,8 +5066,12 @@
       <German>Zeigt automatisch nächstgelegene Objekte innerhalb von 15m an, deaktiviere es, wenn du Leistungprobleme hast.</German>
       <French>Révèle automatiquement les objets les plus proches au sein de 15m, désactiver ce paramètre si vous rencontrez des problèmes de performance.</French>
       <Italian>Rivela automaticamente gli oggettivi vicini entro 15m, disattiva quest'impostazione se riscontri dei problemi di perfomance di sistema.</Italian>
-      <Portuguese>Revela objetos à 15m, desligue essa opção se está tendo problemas de performance.</Portuguese>
+      <Portuguese>Revela objetos à 15m, desabilite essa opção se está tendo problemas de performance.</Portuguese>
       <Polish>Automatycznie wykrywa najbliższe obiekty w promieniu 15m, wyłącz tę opcję jeśli masz problemy z wydajnością</Polish>
+    </Key>
+	<Key ID="STR_GUI_SideSwitch">
+      <Original>Switch side-channel mode, turn this off if you don't want to talk with players from your side.</Original>
+      <Portuguese>Habilita/Desabilita o side-channel, desabilite caso você não queira conversar com os jogadores da sua facção.</Portuguese>
     </Key>
     <Key ID="STR_GUI_PlayTags">
       <Original>Controls whether or not players will have name tags above their head.</Original>
@@ -5136,6 +5234,10 @@
       <Portuguese>Vender Garagem</Portuguese>
       <Polish>Sprzedaj garaż</Polish>
     </Key>
+	<Key ID="STR_pInAct_RemoveContainer">
+      <Original>Remove Container</Original>
+	  <Portuguese>Remover Caixa</Portuguese>
+    </Key>
     <Key ID="STR_pInAct_AccessGarage">
       <Original>Garage</Original>
       <German>Garage</German>
@@ -5197,7 +5299,7 @@
       <German>Auf Gang-Konto einzahlen</German>
       <French>Déposer pour le gang</French>
       <Italian>Deposita alla Gang</Italian>
-      <Portuguese>Depositar: Gangue</Portuguese>
+      <Portuguese>Depositar para Gangue</Portuguese>
       <Polish>Wpłać na konto Gangu</Polish>
     </Key>
 	<Key ID="STR_pInAct_Seize">
@@ -5281,6 +5383,10 @@
       <Italian>Cerca Veicolo</Italian>
       <Portuguese>Vasculhar Veículo</Portuguese>
       <Polish>Przeszukaj pojazd</Polish>
+    </Key>
+	<Key ID="STR_vInAct_SearchContainer">
+      <Original>Search Container</Original>
+      <French>Fouiller Container</French>
     </Key>
     <Key ID="STR_vInAct_PullOut">
       <Original>Pullout Players</Original>
@@ -5849,6 +5955,31 @@
       <Polish>Otrzymałeś wypłatę w kwocie $%1</Polish>
     </Key>
   </Package>
+  <Package name="Fuel_Pump">
+    <Key ID="STR_Action_Pump">
+      <Original>Refuel the nearest vehicle</Original>
+      <French>Ravitaillez en essence le véhicule le plus proche</French>
+    </Key>
+    <Key ID="STR_Price_Fuel_Pump">
+      <Original>Price Per Liter: $%1</Original>
+      <French>Prix au litre: %1$</French>
+    </Key>
+    <Key ID="STR_Fuel_Tank_Vehicle">
+      <Original>Current fuel Amount:</Original>
+    </Key>
+    <Key ID="STR_Select_Vehicle_Pump">
+      <Original>Select a vehicle</Original>
+      <French>Selectionne un vehicule!</French>
+    </Key>
+    <Key ID="STR_Distance_Vehicle_Pump">
+      <Original>The vehicle is too far away, or you are inside it!</Original>
+      <French>Le vehicule est trop loin ou tu es dedans!</French>
+    </Key>
+    <Key ID="STR_Vehicle_Ready_Pump">
+      <Original>The vehicle is full!</Original>
+      <French>Le véhicule est plein!</French>
+    </Key>
+  </Package>
   <Package name="Player_Actions">
     <Key ID="STR_pAct_DropFishingNet">
       <Original>Drop Fishing Net</Original>
@@ -6357,6 +6488,169 @@
       <Original>Pay Bail</Original>
       <Polish>Zapłać kaucję</Polish>
     </Key>
-
   </Package>
+  <Package name="Crimes">
+    <Key ID="STR_Crime_187V">
+      <Original>Vehicular Manslaughter</Original>
+    </Key>
+    <Key ID="STR_Crime_187">
+      <Original>Manslaughter</Original>
+    </Key>
+    <Key ID="STR_Crime_901">
+      <Original>Escaping Jail</Original>
+    </Key>
+    <Key ID="STR_Crime_215">
+      <Original>Attempted Auto Theft</Original>
+    </Key>
+    <Key ID="STR_Crime_213">
+      <Original>Use of illegal explosives</Original>
+    </Key>
+    <Key ID="STR_Crime_211">
+      <Original>Robbery</Original>
+    </Key>
+    <Key ID="STR_Crime_207">
+      <Original>Kidnapping</Original>
+    </Key>
+    <Key ID="STR_Crime_207A">
+      <Original>Attempted Kidnapping</Original>
+    </Key>
+    <Key ID="STR_Crime_390">
+      <Original>Public Intoxication</Original>
+    </Key>
+    <Key ID="STR_Crime_487">
+      <Original>Grand Theft</Original>
+    </Key>
+    <Key ID="STR_Crime_488">
+      <Original>Petty Theft</Original>
+    </Key>
+    <Key ID="STR_Crime_480">
+      <Original>Hit and run</Original>
+    </Key>
+    <Key ID="STR_Crime_481">
+      <Original>Drug Possession</Original>
+    </Key>
+    <Key ID="STR_Crime_482">
+      <Original>Intent to distribute</Original>
+    </Key>
+    <Key ID="STR_Crime_483">
+      <Original>Drug Trafficking</Original>
+    </Key>
+    <Key ID="STR_Crime_459">
+      <Original>Burglary</Original>
+    </Key>
+    <Key ID="STR_Crime_666">
+      <Original>Tax Evasion</Original>
+    </Key>
+    <Key ID="STR_Crime_667">
+      <Original>Terrorism</Original>
+    </Key>
+    <Key ID="STR_Crime_668">
+      <Original>Unlicensed Hunting</Original>
+    </Key>
+    <Key ID="STR_Crime_919">
+      <Original>Organ Theft</Original>
+    </Key>
+    <Key ID="STR_Crime_919A">
+      <Original>Attempted Organ Theft</Original>
+    </Key>
+    <Key ID="STR_Crime_1">
+      <Original>Driving without license</Original>
+      <French>Absence du permis de conduire</French>
+    </Key>
+    <Key ID="STR_Crime_2">
+      <Original>Driving in the wrong way of the street</Original>
+      <French>Conduite sur le mauvais côté de la route</French>
+    </Key>
+    <Key ID="STR_Crime_3">
+      <Original>Not respecting the signalizations</Original>
+      <French>Non respect des signalisations</French>
+    </Key>
+    <Key ID="STR_Crime_4">
+      <Original>Speeding</Original>
+      <French>Excès de vitesse</French>
+    </Key>
+    <Key ID="STR_Crime_5">
+      <Original>No headlight in the night</Original>
+      <French>Absence de phare la nuit</French>
+    </Key>
+    <Key ID="STR_Crime_6">
+      <Original>Driving kart without helmet</Original>
+      <French>Non-port du casque en Kart</French>
+    </Key>
+    <Key ID="STR_Crime_7">
+      <Original>Badly parked vehicle</Original>
+      <French>Véhicule mal garé</French>
+    </Key>
+    <Key ID="STR_Crime_8">
+      <Original>Rebel vehicle (Not armed)</Original>
+      <French>Véhicule rebel non armé</French>
+    </Key>
+    <Key ID="STR_Crime_9">
+      <Original>Grand Theft (Civilian Vehicle)</Original>
+      <French>Vol de véhicule civil</French>
+    </Key>
+    <Key ID="STR_Crime_10">
+      <Original>Grand Theft (Military Vehicle)</Original>
+      <French>Vol de véhicule militaire</French>
+    </Key>
+    <Key ID="STR_Crime_11">
+      <Original>Armored Vehicle</Original>
+      <French>Véhicules blindés</French>
+    </Key>
+    <Key ID="STR_Crime_12">
+      <Original>Flying over the city without authorization</Original>
+      <French>Survol de ville sans autorisation</French>
+    </Key>
+    <Key ID="STR_Crime_13">
+      <Original>Closing the street without authorization</Original>
+      <French>Interdiction de se poser sans autorisation</French>
+    </Key>
+    <Key ID="STR_Crime_14">
+      <Original>Open carry in city (Legal Weapon)</Original>
+      <French>Arme légale visible en ville</French>
+    </Key>
+    <Key ID="STR_Crime_15">
+      <Original>Rebel weapon</Original>
+      <French>Armes rebelles</French>
+    </Key>
+    <Key ID="STR_Crime_16">
+      <Original>Ilegal clothing</Original>
+      <French>Vêtements illégaux</French>
+    </Key>
+    <Key ID="STR_Crime_17">
+      <Original>Hiding face (Mask)</Original>
+      <French>Cacher son visage</French>
+    </Key>
+    <Key ID="STR_Crime_18">
+      <Original>Refuses to cooperate</Original>
+      <French>Refus d'obtempérer</French>
+    </Key>
+    <Key ID="STR_Crime_19">
+      <Original>Hit and run</Original>
+      <French>Délit de fuite</French>
+    </Key>
+    <Key ID="STR_Crime_20">
+      <Original>Insulting a civilian</Original>
+      <French>Insulte envers un civil</French>
+    </Key>
+    <Key ID="STR_Crime_21">
+      <Original>Insulting a soldier</Original>
+      <French>Insulte envers un militaire</French>
+    </Key>
+    <Key ID="STR_Crime_22">
+      <Original>Drug dealing</Original>
+      <French>Trafique de drogue</French>
+    </Key>
+    <Key ID="STR_Crime_23">
+      <Original>Federal research breaking</Original>
+      <French>Intrusion dans le coffre du gouverneur</French>
+    </Key>
+    <Key ID="STR_Crime_24">
+      <Original>Killing of a civilian</Original>
+      <French>Meurtre d'un civil</French>
+    </Key>
+    <Key ID="STR_Crime_25">
+      <Original>Killing of a soldier</Original>
+      <French>Meurtre d'un militaire</French>
+    </Key>
 </Project>

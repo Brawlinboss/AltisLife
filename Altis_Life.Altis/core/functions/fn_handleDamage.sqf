@@ -39,4 +39,7 @@ if (((_curMag in ["30Rnd_556x45_Stanag_Tracer_Red","30Rnd_65x39_caseless_mag_Tra
 // No killing in cop restraints
 if(player getVariable "restrained") then { _damage = 0; };
 
+// No Death in jail
+if (life_is_arrested) then { _damage = 0; };
+
 _damage;

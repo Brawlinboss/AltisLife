@@ -17,7 +17,7 @@
 #define Btn9 37458
 #define Title 37401
 
-private["_display","_curTarget","_Btn1","_Btn2","_Btn3","_Btn4","_Btn5","_Btn6","_Btn7","_Btn9"];
+private["_display","_curTarget","_Btn1","_Btn2","_Btn3","_Btn4","_Btn5","_Btn6","_Btn7","_Btn8","_Btn9"];
 _curTarget = param [0,ObjNull,[ObjNull]];
 disableSerialization;
 if(isNull _curTarget) exitWith {closeDialog 0;}; //Bad target
@@ -32,8 +32,14 @@ _Btn4 = _display displayCtrl Btn4;
 _Btn5 = _display displayCtrl Btn5;
 _Btn6 = _display displayCtrl Btn6;
 _Btn7 = _display displayCtrl Btn7;
+_Btn8 = _display displayCtrl Btn8;
 _Btn9 = _display displayCtrl Btn9;
 life_pInact_curTarget = _curTarget;
+
+if((_curTarget getVariable["Escorting",false])) then
+{
+	{ _x ctrlShow false; } forEach [_Btn2,_Btn3,_Btn5,_Btn6,_Btn7,_Btn8,_Btn9];
+};
 
 //Set Unrestrain Button
 if(_curTarget getVariable["restrained",false]) then

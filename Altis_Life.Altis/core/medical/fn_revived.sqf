@@ -10,8 +10,7 @@ private["_medic","_dir","_reviveCost"];
 _medic = param [0,"Unknown Medic",[""]];
 _reviveCost = LIFE_SETTINGS(getNumber,"revive_fee");
 
-_oldGear = [life_corpse] call life_fnc_fetchDeadGear;
-[_oldGear] spawn life_fnc_loadDeadGear;
+[life_dead_gear] spawn life_fnc_loadDeadGear;
 life_corpse SVAR ["realname",nil,true]; //Should correct the double name sinking into the ground.
 [life_corpse] remoteExecCall ["life_fnc_corpse",RANY];
 
@@ -30,16 +29,24 @@ if(BANK > _reviveCost) then
 	BANK = 0;
 };
 
-[] call life_fnc_playerSkins;
-
 //Bring me back to life.
 player setDir _dir;
 player setPosASL (visiblePositionASL life_corpse);
-life_corpse SVAR ["Revive",nil,TRUE];
-life_corpse SVAR ["name",nil,TRUE];
+life_corpse SVAR ["Revive",nil,true];
+life_corpse SVAR ["name",nil,true];
 [life_corpse] remoteExecCall ["life_fnc_corpse",RANY];
 deleteVehicle life_corpse;
 
-player SVAR ["Revive",nil,TRUE];
-player SVAR ["name",nil,TRUE];
-player SVAR ["Reviving",nil,TRUE];
+player SVAR ["Revive",nil,true];
+player SVAR ["name",nil,true];
+player SVAR ["Reviving",nil,true];
+
+[] call life_fnc_playerSkins;
+if(!life_swat_commander && !life_swat_recon && !life_swat_assault) then
+{
+	[] call SOCK_fnc_updateRequest;
+}
+else
+{
+	[6] call SOCK_fnc_updatePartial;
+};

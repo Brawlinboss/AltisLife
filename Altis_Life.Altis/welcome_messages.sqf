@@ -15,20 +15,16 @@ _FadeIn             = 3; //how long one role should stay on screen. Use value fr
 _posDefault         = [0.3,0.55,0.5]; // Defualt Positions of all Credits
 
 _title              = format ["Welcome %1",name player];
-_shorttext          = "Altis Life by Savage Badger Gaming";
+_shorttext          = "Nexus Life";
 _posText            = [0.8,0.5,0.4];
 
-_title2             = "Our Community";
-_shorttext2         = "www.SavageBadger.com";
+_title2             = "Join the Community";
+_shorttext2         = "www.life-nexus.com";
 _posText2           = [0.8,0.5,0.25];
 
 _title3             = "Teamspeak 3";
-_shorttext3         = "wardite.typefrag.com:8750";
+_shorttext3         = "ts.life-nexus.com";
 _posText3           = [0.8,0.5,0.25];
-
-_title4             = "Donate Today";
-_shorttext4         = "Secure our future together - www.SavageBadger.com";
-_posText4           = [0.8,0.5,0.28];
 
 _title5             = "Play Fair And Enjoy";
 _shorttext5         = "Admins are Always Active";

@@ -40,18 +40,20 @@ if(vehicle player != player) exitWith {};
 _diff = [SEL(_gather,0),SEL(_gather,1),life_carryWeight,life_maxWeight] call life_fnc_calWeightDiff;
 _originalPos = getPos player;
 
+_itemName = M_CONFIG(getText,"VirtualItems",SEL(_gather,0),"displayName");
+titleText[format["You have started gathering %1",(localize _itemName)],"PLAIN"];
+
 while {life_carryWeight < life_maxWeight} do
-	{
-		if(EQUAL(_diff,0)) exitWith {hint localize "STR_NOTF_InvFull"};
-		life_action_gathering = true;
-		if(player distance _originalPos > 2) exitWith { life_action_gathering = false; titleText["Stop moving! Gathering Stopped.","PLAIN"]; };
-		sleep 3;
-		([true,SEL(_gather,0),_diff] call life_fnc_handleInv);
-		_itemName = M_CONFIG(getText,"VirtualItems",SEL(_gather,0),"displayName");
-		titleText[format[localize "STR_NOTF_Gather_Success",(localize _itemName),_diff],"PLAIN"];
-		titleFadeOut 1;
-		if(((life_carryWeight) + _diff) >= (life_maxWeight)) exitWith {life_action_gathering = false; titleText["Your inventory is full!", "PLAIN"];};
-		if(player distance _originalPos > 2) exitWith { life_action_gathering = false; titleText["Stop moving! Gathering Stopped.","PLAIN"]; };
-	};
+{
+	if(EQUAL(_diff,0)) exitWith {hint localize "STR_NOTF_InvFull"};
+	life_action_gathering = true;
+	if(player distance _originalPos > 2) exitWith { life_action_gathering = false; titleText["Stop moving! Gathering Stopped.","PLAIN"]; };
+	sleep 3;
+	([true,SEL(_gather,0),_diff] call life_fnc_handleInv);
+	titleText[format[localize "STR_NOTF_Gather_Success",(localize _itemName),_diff],"PLAIN"];
+	titleFadeOut 1;
+	if(((life_carryWeight) + _diff) >= (life_maxWeight)) exitWith {life_action_gathering = false; titleText["Your inventory is full!", "PLAIN"];};
+	if(player distance _originalPos > 2) exitWith { life_action_gathering = false; titleText["Stop moving! Gathering Stopped.","PLAIN"]; };
+};
 
 life_action_gathering = false;

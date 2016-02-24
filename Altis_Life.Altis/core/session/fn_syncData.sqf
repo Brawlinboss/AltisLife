@@ -10,8 +10,17 @@ _fnc_scriptName = "Player Synchronization";
 if(isNil "life_session_time") then {life_session_time = false;};
 if(life_session_time) exitWith {hint localize "STR_Session_SyncdAlready";};
 
-[] call SOCK_fnc_updateRequest;
-hint localize "STR_Session_SyncData";
+if(life_swat_commander or life_swat_recon or life_swat_assault) then
+{
+	[6] call SOCK_fnc_updatePartial;
+	hint "Your money has been saved! Gear will not be saved as you are swat!";
+}
+else
+{
+	[] call SOCK_fnc_updateRequest;
+	hint localize "STR_Session_SyncData";
+};
+
 [] spawn
 {
 	life_session_time = true;

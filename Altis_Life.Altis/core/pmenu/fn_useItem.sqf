@@ -43,8 +43,12 @@ switch (true) do {
 		[cursorTarget] spawn life_fnc_defuseKit;
 	};
 
-	case (_item in ["storagesmall","storagebig"]): {
-		[_item] call life_fnc_storageBox;
+	case (EQUAL(_item,"storagesmall")): {
+		[] call life_fnc_storageBoxSmall;
+	};
+
+	case (EQUAL(_item,"storagebig")): {
+		[] call life_fnc_storageBoxBig;
 	};
 
 	case (EQUAL(_item,"spikeStrip")): {
@@ -81,6 +85,10 @@ switch (true) do {
 		[] spawn life_fnc_pickAxeUse;
 	};
 
+	case (EQUAL(_item,"campfire")): {
+		"Land_Campfire_F" createVehicle position player;
+	};
+	
 	default {
 		hint localize "STR_ISTR_NotUsable";
 	};

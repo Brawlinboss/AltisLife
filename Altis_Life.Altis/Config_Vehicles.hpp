@@ -64,8 +64,7 @@ class CarShops
         side = "med";
         vehicles[] =
         {
-            { "B_Heli_Light_01_F", 25000, { "mAir" }, { "", "", -1 } },
-            { "O_Heli_Light_02_unarmed_F", 45000, { "mAir" }, { "", "", -1 } }
+            { "B_Heli_Light_01_F", 25000, { "mAir" }, { "", "", -1 } }
         };
     };
 
@@ -89,11 +88,28 @@ class CarShops
         {
             { "B_Quadbike_01_F", 600, { "" }, { "", "", -1 } },
             { "B_G_Offroad_01_F", 3400, { "rebel" }, { "", "", -1 } },
-            { "O_MRAP_02_F", 75000, { "" }, { "rebel", "", -1 } },
+            { "O_MRAP_02_F", 75000, { "rebel" }, { "", "", -1 } },
             { "O_G_Offroad_01_armed_F", 120000, { "rebel" }, { "", "", -1 } },
             { "C_Hatchback_01_F", 6500, { "rebel" }, { "", "", -1 } },
             { "C_Hatchback_01_sport_F", 6500, { "rebel" }, { "", "", -1 } },
             { "C_SUV_01_F", 4000, { "rebel" }, { "", "", -1 } }
+        };
+    };
+
+    class undercover_rebel
+    {
+        side = "cop";
+        vehicles[] =
+        {
+            { "B_Quadbike_01_F", 100, { "" }, { "life_coplevel", "SCALAR", 2 } },
+            { "B_G_Offroad_01_F", 900, { "" }, { "life_coplevel", "SCALAR", 2 } },
+            { "O_MRAP_02_F", 1200, { "" }, { "life_coplevel", "SCALAR", 2 } },
+            { "O_G_Offroad_01_armed_F", 4500, { "" }, { "life_coplevel", "SCALAR", 2 } },
+            { "C_Hatchback_01_F", 3000, { "" }, { "life_coplevel", "SCALAR", 2 } },
+            { "C_Hatchback_01_sport_F", 12000, { "" }, { "life_coplevel", "SCALAR", 2 } },
+            { "C_SUV_01_F", 15000, { "" }, { "life_coplevel", "SCALAR", 2 } },
+            { "O_Heli_Light_02_unarmed_F", 100000, { "" }, { "life_coplevel", "SCALAR", 2 } },
+            { "B_Heli_Light_01_F", 65000, { "" }, { "life_coplevel", "SCALAR", 2 } }
         };
     };
 
@@ -119,8 +135,8 @@ class CarShops
         vehicles[] =
         {
             { "O_Heli_Light_02_unarmed_F", 100000, { "rebel" }, { "", "", -1 } },
-            { "I_Heli_light_03_unarmed_F", 85000, { "rebel" }, { "", "", -1 } },
-            { "B_Heli_Light_01_F", 65000, { "rebel" }, { "", "", -1 } }
+            { "B_Heli_Light_01_F", 65000, { "rebel" }, { "", "", -1 } },
+			{ "I_Heli_Transport_02_F", 165000, { "rebel" }, { "", "", -1 } }
         };
     };
 
@@ -130,6 +146,7 @@ class CarShops
         vehicles[] =
         {
             { "C_Heli_Light_01_civil_F", 52500, { "pilot" }, { "", "", -1 } },
+			{ "I_Plane_Fighter_03_AA_F", 1525500, { "pilot" }, { "", "", -1 } }
         };
     };
 
@@ -203,6 +220,37 @@ class LifeCfgVehicles
         insurance = 2500;
         chopShop = 1200;
         textures[] = {};
+    };
+
+    class I_Plane_Fighter_03_AA_F
+    {
+        vItemSpace = 15;
+        storageFee[] = { 55000, 35000, 0, 0 };
+        garageSell[] = { 72500, 35000, 0, 0 };
+        insurance = 2500;
+        chopShop = 75000;
+        textures[] = {};
+    };
+
+	class I_Heli_Transport_02_F
+    {
+        vItemSpace = 650;
+        storageFee[] = { 55000, 22000, 0, 0 };
+        garageSell[] = { 72500, 35000, 0, 0 };
+        insurance = 2500;
+        chopShop = 75000;
+        textures[] = {
+            { "Ion", "civ", {
+                "\a3\air_f_beta\Heli_Transport_02\Data\Skins\heli_transport_02_1_ion_co.paa",
+                "\a3\air_f_beta\Heli_Transport_02\Data\Skins\heli_transport_02_2_ion_co.paa",
+                "\a3\air_f_beta\Heli_Transport_02\Data\Skins\heli_transport_02_3_ion_co.paa"
+            } },
+            { "Dahoman", "civ", {
+                "\a3\air_f_beta\Heli_Transport_02\Data\Skins\heli_transport_02_1_dahoman_co.paa",
+                "\a3\air_f_beta\Heli_Transport_02\Data\Skins\heli_transport_02_2_dahoman_co.paa",
+                "\a3\air_f_beta\Heli_Transport_02\Data\Skins\heli_transport_02_3_dahoman_co.paa"
+            } }
+        };
     };
 
     class O_Truck_02_transport_F
@@ -282,7 +330,12 @@ class LifeCfgVehicles
         garageSell[] = { 0, 85000, 0, 0 };
         insurance = 16000;
         chopShop = 45000;
-        textures[] = {};
+        textures[] =
+        {
+            { "Police", "cop", {
+                "textures\police_heli.paa"
+            } }
+        };
     };
 
     class I_Heli_light_03_unarmed_F
@@ -292,7 +345,12 @@ class LifeCfgVehicles
         garageSell[] = { 0, 85000, 0, 0 };
         insurance = 16000;
         chopShop = 45000;
-        textures[] = {};
+        textures[] =
+        {
+            { "Police", "cop", {
+                "textures\police_hellcat.paa"
+            } }
+        };
     };
 
     class B_Heli_Transport_01_F
@@ -375,6 +433,16 @@ class LifeCfgVehicles
         textures[] = { };
     };
 
+    class B_SDV_01_F
+    {
+        vItemSpace = 85;
+        storageFee[] = { 4500, 2500, 0, 0 };
+        garageSell[] = { 6800, 3500, 0, 0 };
+        insurance = 2500;
+        chopShop = 5000;
+        textures[] = { };
+    };
+
     class C_Boat_Civil_01_F
     {
         vItemSpace = 85;
@@ -432,7 +500,12 @@ class LifeCfgVehicles
         garageSell[] = { 3500, 0, 0, 0 };
         insurance = 2500;
         chopShop = 50000;
-        textures[] = { };
+        textures[] =
+        {
+            { "Police", "cop", {
+                "textures\Police_Stridert.paa"
+            } }
+        };
     };
 
     class C_Offroad_01_F
@@ -468,11 +541,11 @@ class LifeCfgVehicles
                 "\A3\soft_F\Offroad_01\Data\offroad_01_ext_BASE05_CO.paa",
                 "\A3\soft_F\Offroad_01\Data\offroad_01_ext_BASE05_CO.paa"
             } },
+            { "Police", "cop", {
+                "textures\police_offroad.paa"
+            } },
             { "Taxi", "civ", {
                 "#(argb,8,8,3)color(0.6,0.3,0.01,1)"
-            } },
-            { "Police", "cop", {
-                "#(ai,64,64,1)Fresnel(1.3,7)"
             } }
         };
     };
@@ -526,6 +599,9 @@ class LifeCfgVehicles
         chopShop = 3500;
         textures[] =
         {
+            { "Police", "cop", {
+                "textures\police_hatchback.paa"
+            } },
             { "Red", "civ", {
                 "\a3\soft_f_gamma\Hatchback_01\data\hatchback_01_ext_sport01_co.paa"
             } },
@@ -543,9 +619,6 @@ class LifeCfgVehicles
             } },
             { "Green", "civ", {
                 "\a3\soft_f_gamma\Hatchback_01\data\hatchback_01_ext_sport06_co.paa"
-            } },
-            { "Police", "cop", {
-                "#(ai,64,64,1)Fresnel(1.3,7)"
             } }
         };
     };
@@ -561,7 +634,7 @@ class LifeCfgVehicles
         {
             { "Hunting", "civ", {
                 "textures\hunting_offroad.jpg"
-            } },
+            } }
         };
     };
 
@@ -589,7 +662,7 @@ class LifeCfgVehicles
         chopShop = 2500;
         textures[] =
         {
-            { "Brown", "cop", {
+            { "Police", "cop", {
                 "\A3\Soft_F\Quadbike_01\Data\Quadbike_01_co.paa"
             } },
             { "Digi Desert", "reb", {
@@ -667,17 +740,14 @@ class LifeCfgVehicles
             { "Dark Red", "civ", {
                 "\a3\soft_f_gamma\SUV_01\Data\suv_01_ext_co.paa"
             } },
-            { "Black", "cop", {
-                "\a3\soft_f_gamma\SUV_01\Data\suv_01_ext_02_co.paa"
+            { "Police", "cop", {
+                "textures\police_suv.paa"
             } },
             { "Silver", "civ", {
                 "\a3\soft_f_gamma\SUV_01\Data\suv_01_ext_03_co.paa"
             } },
             { "Orange", "civ", {
                 "\a3\soft_f_gamma\SUV_01\Data\suv_01_ext_04_co.paa"
-            } },
-            { "Cop", "cop", {
-                "#(ai,64,64,1)Fresnel(1.3,7)"
             } }
         };
     };
@@ -720,15 +790,16 @@ class LifeCfgVehicles
 
     class B_MRAP_01_F
     {
-        vItemSpace = 20;
+        vItemSpace = 0;
         storageFee[] = { 0, 7500, 0, 0 };
         garageSell[] = { 0, 10000, 0, 0 };
         insurance = 2500;
         chopShop = 50000;
         textures[] =
         {
-            { "Regular", "cop", {
-                "\A3\Soft_F\MRAP_01\Data\mrap_01_base_co.paa"
+            { "Police", "cop", {
+                "textures\Police_hunter_1.paa",
+                "textures\Police_hunter_2.paa"
             } }
         };
     };
@@ -793,7 +864,7 @@ class LifeCfgVehicles
         chopShop = 5000;
         textures[] =
         {
-            { "Black", "cop", {
+            { "Police", "cop", {
                 "\a3\air_f\Heli_Light_02\Data\heli_light_02_ext_co.paa"
             } },
             { "White / Blue", "rebel", {
@@ -804,31 +875,6 @@ class LifeCfgVehicles
             } },
             { "Desert Digi", "rebel", {
                 "\a3\air_f\Heli_Light_02\Data\heli_light_02_ext_opfor_co.paa"
-            } },
-            { "EMS White", "rebel", {
-                "#(argb,8,8,3)color(1,1,1,0.8)"
-            } }
-        };
-    };
-
-    class I_Heli_Transport_02_F
-    {
-        vItemSpace = 120;
-        storageFee[] = { 75000, 0, 0, 0 };
-        garageSell[] = { 125000, 0, 0, 0 };
-        insurance = 2500;
-        chopShop = 5000;
-        textures[] =
-        {
-            { "Ion", "civ", {
-                "\a3\air_f_beta\Heli_Transport_02\Data\Skins\heli_transport_02_1_ion_co.paa",
-                "\a3\air_f_beta\Heli_Transport_02\Data\Skins\heli_transport_02_2_ion_co.paa",
-                "\a3\air_f_beta\Heli_Transport_02\Data\Skins\heli_transport_02_3_ion_co.paa"
-            } },
-            { "Dahoman", "civ", {
-                "\a3\air_f_beta\Heli_Transport_02\Data\Skins\heli_transport_02_1_dahoman_co.paa",
-                "\a3\air_f_beta\Heli_Transport_02\Data\Skins\heli_transport_02_2_dahoman_co.paa",
-                "\a3\air_f_beta\Heli_Transport_02\Data\Skins\heli_transport_02_3_dahoman_co.paa"
             } }
         };
     };

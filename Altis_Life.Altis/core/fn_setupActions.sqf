@@ -11,13 +11,21 @@ switch (playerSide) do
 		//Drop fishing net
 		life_actions = [player addAction[localize "STR_pAct_DropFishingNet",life_fnc_dropFishingNet,"",1.5,true,true,"",'
 		(surfaceisWater (getPos vehicle player)) && (vehicle player isKindOf "Ship") && life_carryWeight < life_maxWeight && speed (vehicle player) < 2 && speed (vehicle player) > -1 && !life_net_dropped ']];
+
 		//Rob person
 		life_actions = life_actions + [player addAction[localize "STR_pAct_RobPerson",life_fnc_robAction,"",1.5,true,true,"",'
 		!isNull cursorTarget && player distance cursorTarget < 3.5 && isPlayer cursorTarget && animationState cursorTarget == "Incapacitated" && !(cursorTarget getVariable["robbed",FALSE]) ']];
+
+		//Rob person
+		life_actions = life_actions + [player addAction[localize "STR_pAct_RobPerson",life_fnc_robAction,"",1.5,true,true,"",'
+		!isNull cursorTarget && player distance cursorTarget < 3.5 && isPlayer cursorTarget && cursorTarget getVariable ["playerSurrender",false] && !(cursorTarget getVariable["Escorting",FALSE]) ']];
 	};
 
 	case west:
 	{
+		//Restrain Player
+		life_actions = life_actions + [player addAction["<t color='#FF8000'>Restrain Person</t>",life_fnc_restrainAction,cursorTarget,2,true,true,"",'if (isPlayer cursorTarget) then { (alive cursorTarget && cursorTarget distance player < 3.5 && !(cursorTarget getVariable ["restrained",false]) && speed cursorTarget < 2) };']];
+
 		//Seize Ground Objects
 		life_actions = life_actions + [player addAction[localize "STR_pAct_SeizeObj",life_fnc_seizeObj,cursorTarget,1.5,true,true,"",'((count(nearestObjects [player,["WeaponHolder"],3])>0) || (count(nearestObjects [player,["GroundWeaponHolder"],3])>0) || (count(nearestObjects [player,["WeaponHolderSimulated"],3])>0))']];
 
@@ -43,14 +51,11 @@ switch (playerSide) do
 	};
 };
 
+//Ball Punching
 life_actions = life_actions + [player addAction["Punch Balls",life_fnc_punchBallsAction,"",1.5,true,true,"",'!isNull cursorTarget && player distance cursorTarget < 5 && isPlayer cursorTarget && animationState cursorTarget in ["Incapacitated","amovpercmstpsnonwnondnon_amovpercmstpssurwnondnon"]']];
 
-/*
-*
-* Will add into later...
 //Bloodbag Self
-life_actions = life_actions + [player addAction["<t color='#FF0000'>Self Bloodbag</t>",life_fnc_bloodbagself,"",1.5,true,true,"",' player isKindOf "Man" && alive player && (damage player) > 0.05 && (life_inv_bloodbag > 0)']];
+life_actions = life_actions + [player addAction["<t color='#FF0000'>Self Bloodbag</t>",life_fnc_bloodbagself,"",1.5,false,true,"",'player isKindOf "Man" && alive player && (damage player) > 0.05 && (life_inv_bloodbag > 0)']];
+
 //Bloodbag Others
-life_actions = life_actions + [player addAction["<t color='#FF0000'>Give Bloodbag</t>",life_fnc_bloodbag,"",2,false,false,"",'!isNull cursorTarget && cursorTarget isKindOf "Man" && (isPlayer cursorTarget) && alive cursorTarget && (damage cursorTarget) > 0.05 && cursorTarget distance player < 3.5 && (life_inv_bloodbag > 0)']];
-*
-*/
+life_actions = life_actions + [player addAction["<t color='#FF0000'>Give Bloodbag</t>",life_fnc_bloodbag,"",1.5,true,true,"",'!isNull cursorTarget && cursorTarget isKindOf "Man" && (isPlayer cursorTarget) && alive cursorTarget && (damage cursorTarget) > 0.05 && cursorTarget distance player < 3.5 && (life_inv_bloodbag > 0)']];
